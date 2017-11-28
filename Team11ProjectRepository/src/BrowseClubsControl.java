@@ -20,7 +20,7 @@ public class BrowseClubsControl {
 	public ArrayList<ClubObject> processBrowseClubs() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		return dataManager.getAllClubs();
 		// end-user-code
 	}
 }

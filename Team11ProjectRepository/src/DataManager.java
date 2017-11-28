@@ -1,6 +1,8 @@
 /**
  * 
  */
+import java.sql.*;
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +14,7 @@ import java.util.HashMap;
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class DataManager {
+	Connection connection = null;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -49,6 +52,23 @@ public class DataManager {
 	 */
 	private ClubAdminAccounts clubAdminAccounts;
 
+	/*
+	 * Constructor
+	 */
+	public DataManager() {
+		 try {
+	         Class.forName("com.mysql.jdbc.Driver").newInstance();
+	     } catch (Exception e) {
+	      System.err.println(e.toString());
+	     }
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/dmccardl";
+		try {
+		connection = DriverManager.getConnection(url, "dmccardl", "ZZ3Af3RC");
+		} catch (SQLException e) {
+		System.err.println("Database connection error.");
+		}
+	}
+	
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -69,10 +89,39 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList getAllClubs() {
+	public ArrayList<ClubObject> getAllClubs() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ClubObject> clubsList = new ArrayList<ClubObject>();
+		
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "SELECT * FROM Clubs;";
+			
+			//execute SQL query
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			//convert retrieved rows to clubInfoObject[]
+			while (rs.next()) {
+				ClubObject club = new ClubObject();
+				club.name = rs.getString(1);
+				club.description = rs.getString(2);
+				club.location = rs.getString(3);
+				club.clubAdmin = rs.getString(4);
+				// Club Events to be added later
+				//club.events = rs
+				clubsList.add(club);
+			}
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: getAllClubs");
+		}
+		
+		return clubsList;
+	
+
 		// end-user-code
 	}
 
