@@ -2,25 +2,29 @@
  * 
  */
 
-import java.util.ArrayList;
-
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author dmccardl
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class BrowseClubsControl {
+public class ClubObject {
 
-	private DataManager dataManager;
+	public Object name;
 
-	public BrowseClubsControl(DataManager dmIn) {
-		this.dataManager = dmIn;
-	}
-	public ArrayList<ClubObject> processBrowseClubs() {
+	public Object description;
+
+	public Object location;
+
+	public Object clubAdmin;
+
+	public Object events;
+	
+
+	public void sql() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return dataManager.getAllClubs();
+
 		// end-user-code
 	}
 }
