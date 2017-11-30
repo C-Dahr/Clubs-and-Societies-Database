@@ -146,10 +146,30 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Object getClubByClubName(String clubName) {
+	public ClubObject getClubByClubName(String clubName) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ClubObject club = new ClubObject();
+		
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "SELECT * FROM Clubs WHERE Name = '" + clubName + "';";
+			
+			//execute SQL query
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			club.name = rs.getString(1);
+			club.description = rs.getString(2);
+			club.location = rs.getString(3);
+			club.clubAdmin = rs.getString(4);
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: getAllClubs");
+		}
+		
+		return club;
 		// end-user-code
 	}
 

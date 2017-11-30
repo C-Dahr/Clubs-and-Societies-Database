@@ -27,11 +27,6 @@ public class BrowseClubsUI {
 			System.out.println("Club Results: ");
 			for(int i = 0; i < clubsIn.size(); i++) {
 				System.out.println("Club name: " + clubsIn.get(i).name);
-				System.out.println("Description: " + clubsIn.get(i).description); 
-				System.out.println("Location: " + clubsIn.get(i).location);
-				System.out.println("Club Leader: " + clubsIn.get(i).clubAdmin);
-				//ClubEvents will be done later
-				//System.out.println("Upcoming events: " + clubsIn.get(i).year);
 				System.out.println();
 			}
 		}
