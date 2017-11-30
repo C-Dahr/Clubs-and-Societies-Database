@@ -47,7 +47,7 @@ public class ViewOrderStatusServlet extends HttpServlet {
 		}else {
 			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests <a/> </p>");
 			writer.println("<p><a href=RemoveClubServlet.java> Remove a Club <a/> </p>");
-			writer.println("<p><a href=ManageClubAdminRequest.java> Manage Club Admin Requests <a/> </p>");
+			writer.println("<p><a href=ManageClubAdminRequestServlet.java> Manage Club Admin Requests <a/> </p>");
 		}
 	}
 
