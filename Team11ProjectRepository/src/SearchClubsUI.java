@@ -33,9 +33,6 @@ public class SearchClubsUI {
 			System.out.println("Club Search Results:");
 			for(int i = 0; i < clubs.size(); i++) {
 				System.out.println("Club name: " + clubs.get(i).name);
-				System.out.println("Description: " + clubs.get(i).description);
-				System.out.println("Location: " + clubs.get(i).location);
-				System.out.println("Club Leader: " + clubs.get(i).clubAdmin);
 			}
 		}
 		// end-user-code
