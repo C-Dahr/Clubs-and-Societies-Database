@@ -138,12 +138,12 @@ public class DataManager {
 		try {
 			Statement st = connection.createStatement();
 			
-			String sqlQuery = "select * from Clubs where ";
+			String sqlQuery = "SELECT * FROM Clubs WHERE ";
 			for(int i = 0; i < keywords.size(); i++) {
 				if (i < keywords.size() - 1) 
-					sqlQuery += "Name like '%" + keywords.get(i) + "%' or";
+					sqlQuery += "Name LIKE '%" + keywords.get(i) + "%' OR Description LIKE '%" + keywords.get(i) + "%' OR ";
 				else
-					sqlQuery += "Name like '%" + keywords.get(i) + "%' or";
+					sqlQuery += "Name LIKE '%" + keywords.get(i) + "%' OR Description LIKE '%" + keywords.get(i) + "%';";
 			}
 			
 			ResultSet rs = st.executeQuery(sqlQuery);
