@@ -131,10 +131,36 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList<ClubObject> getClubsFromFilterSearch(ArrayList<String> parameters) {
+	public ArrayList<ClubObject> getClubsFromFilterSearch(ArrayList<String> keywords) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ClubObject> clubList = new ArrayList<ClubObject>();
+		try {
+			Statement st = connection.createStatement();
+			
+			String sqlQuery = "select * from Clubs where ";
+			for(int i = 0; i < keywords.size(); i++) {
+				if (i < keywords.size() - 1) 
+					sqlQuery += "Name like '%" + keywords.get(i) + "%' or";
+				else
+					sqlQuery += "Name like '%" + keywords.get(i) + "%' or";
+			}
+			
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			while (rs.next()) {
+				ClubObject club = new ClubObject();
+				club.name = rs.getString(1);
+				club.description = rs.getString(2);
+				club.location = rs.getString(3);
+				club.clubAdmin = rs.getString(4);
+				clubList.add(club);				
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL error: getClubsFromFilterSearch");
+		}
+		
+		return clubList;
 		// end-user-code
 	}
 
