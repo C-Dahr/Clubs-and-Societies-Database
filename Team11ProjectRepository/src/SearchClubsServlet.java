@@ -62,7 +62,7 @@ public class SearchClubsServlet extends HttpServlet {
                                  writer.println(clubs.get(i).name + "<br>");
                                  writer.println("</p>");
                      }
-                     writer.println("<p><a href=ViewClubsUI.html> Home </a> </p>");
+                     writer.println("<p><a href=MainUI.html> Home </a> </p>");
          }
 	}
 
