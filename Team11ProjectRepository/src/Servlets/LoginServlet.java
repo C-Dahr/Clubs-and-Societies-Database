@@ -1,8 +1,12 @@
+package Servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.servlet.http.HttpSession;
+
+import DataManager;
+import LoginControl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,11 +52,12 @@ public class LoginServlet extends HttpServlet {
         userName = userNameList[0];
         password = passwordList[0];
 
-        CustomerObject account = control.processLogin(userName, password);
+        AccountObject account = control.processLogin(userName, password);
        
         //Generate response HTML file
         if (account == null) {
                     writer.println("Login Failed <br>");
+                    writer.println("<p> If you do not have a club admin account and wish to create one click the link below <br/> <a href=RequestClubAdminAccessForm.html> Request Club Admin Access </a> </p>");
                     writer.println("<p><a href=MainUI.html> Home </a> </p>");
         			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
         }else{
