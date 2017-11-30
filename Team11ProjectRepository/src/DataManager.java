@@ -10,8 +10,7 @@ import java.util.HashMap;
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * @author tharvey2
  */
 public class DataManager {
 	Connection connection = null;
@@ -132,7 +131,7 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList getClubsFromFilterSearch(ArrayList parameters) {
+	public ArrayList<ClubObject> getClubsFromFilterSearch(ArrayList<String> parameters) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;

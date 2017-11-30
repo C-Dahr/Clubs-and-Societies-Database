@@ -1,14 +1,10 @@
-/**
- * 
- */
 
 import java.util.ArrayList;
 
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * @author tharvey2
  */
 public class SearchClubsControl {
 
@@ -21,7 +17,7 @@ public class SearchClubsControl {
 	public ArrayList<ClubObject> processSearch(ArrayList<String> parameters) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		return dataManager.getClubsFromFilterSearch(parameters);
 		// end-user-code
 	}
 }
