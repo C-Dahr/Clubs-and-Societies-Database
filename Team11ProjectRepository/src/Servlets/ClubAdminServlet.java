@@ -45,7 +45,7 @@ public class ViewOrderStatusServlet extends HttpServlet {
 			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
  			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
-			if (clubAdmin.club == null){
+			if (clubAdmin.club == ""){
 				writer.println("<p><a href=CreateClubRequestForm.html> Create a Club Request <a/> </p>");
 			}else{
 				writer.println("<p><a href=EditClubServlet.java> Edit your Club <a/> </p>");
