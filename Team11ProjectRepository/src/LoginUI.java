@@ -50,6 +50,8 @@ public class LoginUI {
 			displayLoginFailedMessage();
 		else
 			displayConfirmation();
+		
+		sc.close();
 		// end-user-code
 	}
 }

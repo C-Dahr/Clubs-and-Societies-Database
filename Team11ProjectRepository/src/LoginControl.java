@@ -2,33 +2,28 @@
  * 
  */
 
-import java.util.HashMap;
 
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
  * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class LoginControl {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private DataManager dataManager;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param formInfo
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public boolean processLogin(HashMap formInfo) {
+	private DataManager dataManager;
+	
+	public LoginControl(DataManager dm) {
+		this.dataManager = dm;
+	}
+
+	public AccountObject processLogin(String id, String pass) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		AccountObject account;
+		account = dataManager.getClubAdminAccount(id, pass);
+		if(account == null);
+			account = dataManager.getMainAdminAccount(id, pass);
+		return account;
 		// end-user-code
 	}
 }
