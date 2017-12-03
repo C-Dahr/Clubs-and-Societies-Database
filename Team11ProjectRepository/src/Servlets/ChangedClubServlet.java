@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpSession;
 
 import DataManager;
-import EditClubControl;
+import ChangedClubControl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditClubServlet
+ * Servlet implementation class ChangedClubServlet
  */
-@WebServlet("/EditClubServlet")
-public class EditClubServlet extends HttpServlet {
+@WebServlet("/ChangedClubServlet")
+public class ChangedClubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EditClubServlet() {
+    public ChangedClubServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,7 +44,13 @@ public class EditClubServlet extends HttpServlet {
 		DataManager dm = new DataManager();
 		ChangedClubControl control = new ChangedClubControl(dm);
         PrintWriter writer = response.getWriter();
-        ClubAdminAccountObject clubAdmin;
+        
+        String description, location;
+        String[] descriptionList = request.getParameterValues("description");
+        String[] locationList = request.getParameterValues("location");
+        description = descriptionList[0];
+        location = locationList[0];
+        
         try {
 		HttpSession session=request.getSession(false); 
         clubAdmin =(ClubAdminAccountObject) session.getAttribute("User");
@@ -56,14 +62,9 @@ public class EditClubServlet extends HttpServlet {
 			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
  			 writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
-			writer.println("<h1> UNB CSDB Create Club Request Form </h1>");
-			writer.println("<form action=ChangedClubServlet method=Post>");
-			writer.println("<p>Club Name: " + clubAdmin.club + " </p>");
-			writer.println("<p>Description:  <input type=text name=description value=" + dm.getClubByClubName(clubAdmin.club).description + " size=40></p>");
-			writer.println("<p>Location:  <input type=text name=location value=" + dm.getClubByClubName(clubAdmin.club).location + " size=40></p>");
-			writer.println("<p><input type=submit value=Submit></p>");
-			writer.println("</form>");
-			writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			control.processEditClub(clubAdmin.name,description,location);
+			writer.println("Edit Club Succesful <br>");
+            writer.println("<p><a href=MainUI.html> Home </a> </p>");
 		}
 	}
 
