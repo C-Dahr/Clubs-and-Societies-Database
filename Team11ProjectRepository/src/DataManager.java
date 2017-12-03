@@ -359,10 +359,26 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean removeClubRequest(String suggestedClubName) {
+	public boolean removeClubRequest(String id) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "DELETE FROM ClubRequests WHERE id = '" + id + "';";
+		
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+			
+			result = true;
+		}
+		catch (SQLException e) {
+			System.err.println("SQL error: removeClubRequest");
+		}
+		
+		return result;
 		// end-user-code
 	}
 

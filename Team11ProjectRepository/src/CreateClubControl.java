@@ -39,6 +39,7 @@ public class CreateClubControl {
 	public boolean processRemoval(String requestID) {
 		// begin-user-code
 		// TODO Auto-generated method stub
+		dataManager.removeClubRequest(requestID);
 		return false;
 		// end-user-code
 	}
