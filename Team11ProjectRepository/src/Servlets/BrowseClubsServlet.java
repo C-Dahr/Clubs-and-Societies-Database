@@ -33,7 +33,6 @@ public class BrowseClubsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
@@ -43,7 +42,7 @@ public class BrowseClubsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 DataManager dm = new DataManager();
-         BrowseClubsControl control = new SearchClubsControl(dm);
+         BrowseClubsControl control = new BrowseClubsControl(dm);
          PrintWriter writer = response.getWriter();
         
        
