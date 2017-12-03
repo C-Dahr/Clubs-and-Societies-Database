@@ -60,12 +60,14 @@ public class SearchClubsServlet extends HttpServlet {
          if (clubs.size() == 0)
                      writer.println("No clubs were found. <br>");
          else {
+        	 		 writer.println("<form action=ViewClubInfoServlet method=post>")
                      writer.println("<p> Club Search Results: </p>");
+        	 		 writer.println("<p>");
                      for(int i = 0; i < clubs.size(); i++) {
-                                 writer.println("<p>");
-                                 writer.println(clubs.get(i).name + "<br>");
-                                 writer.println("</p>");
+                                 writer.println(clubs(i).name + "<button name='club' type='submit' value='" + clubs(i).name +"'>View Info</button><br>");
                      }
+                     writer.println("</p>");
+                     writer.println("</form>");
                      writer.println("<p><a href=MainUI.html> Home </a> </p>");
          }
 	}
