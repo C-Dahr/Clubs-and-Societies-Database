@@ -7,27 +7,19 @@ import java.util.ArrayList;
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * @author tharvey2
  */
 public class ManageClubAdminAccessControl {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private DataManager dataManager;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public ArrayList processGetAdminRequests() {
+	private DataManager dataManager;
+	
+	public ManageClubAdminAccessControl(DataManager dm) {
+		dataManager = dm;
+	}
+	public ArrayList<ClubAdminRequestObject> processGetAdminRequests() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		return dataManager.getAllAdminRequests();
 		// end-user-code
 	}
 

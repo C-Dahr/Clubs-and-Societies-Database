@@ -31,7 +31,7 @@ public class DataManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private ClubAdminRequests clubAdminRequests;
+	private ClubAdminRequestObject clubAdminRequests;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -268,7 +268,7 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList getAllAdminRequests() {
+	public ArrayList<ClubAdminRequestObject> getAllAdminRequests() {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		return null;
