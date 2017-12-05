@@ -22,28 +22,38 @@ public class CreateClubUI {
 	}
 	
 	public void chooseOptions() {
-		ArrayList<ClubRequestObject> requests = createClubControl.processDisplayClubRequests();
-		displayClubRequests(requests);
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Which request would you like to view? (enter request ID):");
-		String requestIDtoView = sc.nextLine();
-		
-		displayClubRequestInfo(requestIDtoView, requests);
-		
-		System.out.println("Would you like to Approve (1) or Remove (2) the club request?:");
-		String decision = sc.nextLine();
-		
-		switch (decision) {
-			case "1":
-				createClubControl.processApproval(requestIDtoView);
-				break;
-			case "2":
-				createClubControl.processRemoval(requestIDtoView);
-				break;
-			default:
-				System.out.println("Incorrect input.");
+		try {
+			ArrayList<ClubRequestObject> requests = createClubControl.processDisplayClubRequests();
+			displayClubRequests(requests);
+			
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Which request would you like to view? (enter request ID):");
+			String requestIDtoView = sc.nextLine();
+			
+			displayClubRequestInfo(requestIDtoView, requests);
+			
+			System.out.println("Would you like to Approve (1) or Remove (2) the club request?:");
+			String decision = sc.nextLine();
+			
+			sc.close();
+			
+			switch (decision) {
+				case "1":
+					createClubControl.processApproval(requestIDtoView);
+					displayConfirmation();
+					break;
+				case "2":
+					createClubControl.processRemoval(requestIDtoView);
+					displayConfirmation();
+					break;
+				default:
+					System.out.println("Incorrect input.");
+			}
 		}
+		catch(NullPointerException e) {
+			System.out.println("Error resolving request ID.");
+		}
+		
 	}
 
 	private void displayClubRequests(ArrayList<ClubRequestObject> clubRequestsIn) {
@@ -80,10 +90,10 @@ public class CreateClubUI {
 		}
 	}
 
-	public void displayConfirmation(boolean result) {
+	public void displayConfirmation() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		System.out.println("Request completed successfully!");
 		// end-user-code
 	}
 }

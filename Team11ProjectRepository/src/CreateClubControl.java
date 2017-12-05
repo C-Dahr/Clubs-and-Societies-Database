@@ -18,7 +18,7 @@ public class CreateClubControl {
 		this.dataManager = dm;
 	}
 
-	public boolean processApproval(String requestID) {
+	public void processApproval(String requestID) throws NullPointerException {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		ClubRequestObject request = dataManager.getClubRequestByID(requestID);
@@ -30,17 +30,15 @@ public class CreateClubControl {
 		newClub.clubAdmin = request.nameOfRequestSender;
 		
 		boolean result = dataManager.setNewClub(newClub);
-		
-		return result;
+		dataManager.removeClubRequest(requestID);
 		
 		// end-user-code
 	}
 
-	public boolean processRemoval(String requestID) {
+	public void processRemoval(String requestID) throws NullPointerException {
 		// begin-user-code
 		// TODO Auto-generated method stub
 		dataManager.removeClubRequest(requestID);
-		return false;
 		// end-user-code
 	}
 
