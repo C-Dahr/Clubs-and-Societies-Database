@@ -10,15 +10,15 @@
  */
 public class ClubObject {
 
-	public Object name;
+	public String id;
+	
+	public String name;
 
-	public Object description;
+	public String description;
 
-	public Object location;
+	public String location;
 
-	public Object clubAdmin;
-
-	public Object events;
+	public String clubAdmin;
 	
 
 	public void sql() {
