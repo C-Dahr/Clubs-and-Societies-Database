@@ -9,17 +9,17 @@
  */
 public class ClubAdminRequestObject {
 
-	private Object id;
+	public Object id;
 
-	private Object password;
+	public Object password;
 
-	private Object firstName;
+	public Object firstName;
 
-	private Object lastName;
+	public Object lastName;
 
-	private Object email;
+	public Object email;
 
-	private Object clubName;
+	public Object clubName;
 
 	/** 
 	 * <!-- begin-UML-doc -->
