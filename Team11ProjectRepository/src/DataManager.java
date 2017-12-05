@@ -37,7 +37,7 @@ public class DataManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private ClubRequests clubRequests;
+	private ClubRequestObject clubRequests;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -105,10 +105,11 @@ public class DataManager {
 			//convert retrieved rows to clubInfoObject[]
 			while (rs.next()) {
 				ClubObject club = new ClubObject();
-				club.name = rs.getString(1);
-				club.description = rs.getString(2);
-				club.location = rs.getString(3);
-				club.clubAdmin = rs.getString(4);
+				club.id = rs.getString(1);
+				club.name = rs.getString(2);
+				club.description = rs.getString(3);
+				club.location = rs.getString(4);
+				club.clubAdmin = rs.getString(5);
 				// Club Events to be added later
 				//club.events = rs
 				clubsList.add(club);
@@ -171,10 +172,31 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Object getClubByClubName(String clubName) {
+	public ClubObject getClubByClubName(String clubName) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ClubObject club = new ClubObject();
+		
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "SELECT * FROM Clubs WHERE Name = '" + clubName + "';";
+			
+			//execute SQL query
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			club.id = rs.getString(1);
+			club.name = rs.getString(2);
+			club.description = rs.getString(3);
+			club.location = rs.getString(4);
+			club.clubAdmin = rs.getString(5);
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: getAllClubs");
+		}
+		
+		return club;
 		// end-user-code
 	}
 
@@ -309,11 +331,63 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList getAllClubRequests() {
+	public ArrayList<ClubRequestObject> getAllClubRequests() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ClubRequestObject> requestList = new ArrayList<ClubRequestObject>();
+		
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "SELECT * FROM ClubRequests;";
+			
+			//execute SQL query
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			//convert retrieved rows to clubInfoObject[]
+			while (rs.next()) {
+				ClubRequestObject clubRequest = new ClubRequestObject(rs.getString(1),
+															   rs.getString(2), 
+															   rs.getString(3), 
+															   rs.getString(4),
+															   rs.getString(5));
+				requestList.add(clubRequest);
+			}
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: getAllClubRequests");
+		}
+		
+		return requestList;
 		// end-user-code
+	}
+	
+	public ClubRequestObject getClubRequestByID(String id) {
+		
+		ClubRequestObject request = null;
+		
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "SELECT * FROM ClubRequests WHERE id = '" + id + "';";
+			
+			//execute SQL query
+			ResultSet rs = st.executeQuery(sqlQuery);
+		
+			request = new ClubRequestObject(rs.getString(1),
+											rs.getString(2), 
+											rs.getString(3), 
+											rs.getString(4),
+											rs.getString(5));
+			
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: getClubRequestByID");
+		}
+		
+		return request;
 	}
 
 	/** 
@@ -323,10 +397,26 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean removeClubRequest(String suggestedClubName) {
+	public boolean removeClubRequest(String id) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "DELETE FROM ClubRequests WHERE id = '" + id + "';";
+		
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+			
+			result = true;
+		}
+		catch (SQLException e) {
+			System.err.println("SQL error: removeClubRequest");
+		}
+		
+		return result;
 		// end-user-code
 	}
 
@@ -337,10 +427,32 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean setNewClub(Object clubInfo) {
+	public boolean setNewClub(ClubObject clubIn) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "INSERT INTO Clubs VALUES('" + clubIn.id + "',"
+														+ " '" + clubIn.name + "',"
+														+ " '" + clubIn.description + "',"
+														+ " '" + clubIn.name + "',"
+														+ "'" + clubIn.location + "',"
+														+ "'" + clubIn.clubAdmin + "');";
+			
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+			
+			result = true;
+
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: setNewClub");
+		}
+		
+		return result;
 		// end-user-code
 	}
 
