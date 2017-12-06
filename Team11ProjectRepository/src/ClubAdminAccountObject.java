@@ -10,7 +10,7 @@
  */
 public class ClubAdminAccountObject extends AccountObject{
 
-	private Object club;
+	public Object club;
 
 	public ClubAdminAccountObject (String idIn, String passwordIn, String firstNameIn, String lastNameIn, String emailIn) {
 		super(idIn, passwordIn, firstNameIn, lastNameIn, emailIn);

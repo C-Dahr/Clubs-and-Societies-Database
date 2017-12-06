@@ -9,15 +9,15 @@
  */
 public class ClubAdminRequestObject extends RequestObject {
 
-	public Object id;
+	public String id;
 
-	public Object password;
+	public String password;
 
-	public Object firstName;
+	public String firstName;
 
-	public Object lastName;
+	public String lastName;
 
-	public Object email;
+	public String email;
 
 	public Object clubName;
 

@@ -31,7 +31,6 @@ public class CreateClubControl {
 		
 		boolean result = dataManager.setNewClub(newClub);
 		dataManager.removeClubRequest(requestID);
-		
 		// end-user-code
 	}
 
