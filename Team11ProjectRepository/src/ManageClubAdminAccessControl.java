@@ -30,10 +30,18 @@ public class ManageClubAdminAccessControl {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean processNewAdmin(Object adminName) {
+	public boolean processNewAdmin(String requestId) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		ClubAdminRequestObject request = dataManager.getClubAdminRequestByID(requestId);
+		
+		ClubAdminAccountObject newClubAdmin = new ClubAdminAccountObject(request.id, request.password, request.firstName, request.lastName, request.email);
+		
+		
+		boolean result = dataManager.setNewClubAdmin(newClubAdmin);
+		dataManager.removeAdminRequest(requestId);
+		
+		return result;
 		// end-user-code
 	}
 
@@ -44,10 +52,10 @@ public class ManageClubAdminAccessControl {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean processDenyAdmin(String adminName) {
+	public boolean processDenyAdmin(String requestId) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		return dataManager.removeAdminRequest(requestId);
 		// end-user-code
 	}
 }
