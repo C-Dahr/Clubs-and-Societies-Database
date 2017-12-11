@@ -7,6 +7,13 @@ public class EditClubMain {
 		EditClubControl control = new EditClubControl(dm);
 		EditClubUI ui = new EditClubUI(control);
 		
+		boolean clubExists = ui.enterInfo();
+		if(clubExists) {
+			ui.displayEditClubForm();
+		}
+		else {
+			System.out.println("Error: club not found.");
+		}
 	}
 
 }

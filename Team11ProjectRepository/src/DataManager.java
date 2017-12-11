@@ -193,24 +193,10 @@ public class DataManager {
 			club.clubAdmin = rs.getString(5);
 		} 
 		catch (SQLException e) {
-			System.err.println("SQL error: getAllClubs");
+			System.err.println("SQL error: getClubByClubName");
 		}
 		
 		return club;
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubName
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public ArrayList getClubEventsByClubName(String clubName) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
 		// end-user-code
 	}
 
@@ -249,10 +235,31 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean setNewCreateClubRequest(Object createClubRequest) {
+	public boolean setNewCreateClubRequest(ClubRequestObject clubRequestIn) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "INSERT INTO ClubRequests VALUES('" + clubRequestIn.requestID + "',"
+														+ " '" + clubRequestIn.clubName + "',"
+														+ " '" + clubRequestIn.description + "',"
+														+ "'" + clubRequestIn.location + "',"
+														+ "'" + clubRequestIn.nameOfRequestSender + "');";
+			
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+			
+			result = true;
+
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: setNewCreateClubRequest");
+		}
+		
+		return result;
 		// end-user-code
 	}
 
@@ -263,24 +270,27 @@ public class DataManager {
 	 * @param formInfo
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public void updateClubInfo(String clubName, HashMap formInfo) {
+	public void updateClubInfo(String oldName, String newName, String newDesc, String newLocation) {
 		// begin-user-code
 		// TODO Auto-generated method stub
 
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubName
-	 * @param formInfo
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void setNewClubEvent(String clubName, Object formInfo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
+		ClubObject oldInfo = getClubByClubName(oldName);
+		String id = oldInfo.id;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "UPDATE Clubs SET Name = '" + newName + "',"
+								+ " Description = '" + newDesc + "',"
+								+ " Location = '" + newLocation + "'"
+										+ "WHERE id = '" + id + "';";
+			
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: updateClubInfo");
+		}
 		// end-user-code
 	}
 
@@ -438,7 +448,6 @@ public class DataManager {
 			String sqlQuery = "INSERT INTO Clubs VALUES('" + clubIn.id + "',"
 														+ " '" + clubIn.name + "',"
 														+ " '" + clubIn.description + "',"
-														+ " '" + clubIn.name + "',"
 														+ "'" + clubIn.location + "',"
 														+ "'" + clubIn.clubAdmin + "');";
 			
