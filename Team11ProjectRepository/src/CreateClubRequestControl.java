@@ -16,10 +16,10 @@ public class CreateClubRequestControl {
 		this.dataManager = dm;
 	}
 	
-	public boolean processCreateClubRequest(Object formInfo) {
+	public boolean processCreateClubRequest(ClubRequestObject formInfo) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		return dataManager.setNewCreateClubRequest(formInfo);
 		// end-user-code
 	}
 }

@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * 
  */
@@ -19,28 +21,39 @@ public class CreateClubRequestUI {
 	public void displayCreateClubRequestForm() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter suggested club name: ");
+		String newClubName = sc.nextLine();
+		System.out.println("Enter club description: ");
+		String newClubDesc = sc.nextLine();
+		System.out.println("Enter club location: ");
+		String newLocation = sc.nextLine();
+		
+		sc.close();
+		
+		ClubRequestObject formInfo = new ClubRequestObject("id", "name", newClubName, newClubDesc, newLocation);
+		
+		boolean result = createClubRequestControl.processCreateClubRequest(formInfo);
+		if(result) {
+			displayConfirmation();
+		}
+		else {
+			displayErrorMessage();
+		}
 		// end-user-code
 	}
 
-	public void displayConfirmation(boolean result) {
+	public void displayConfirmation() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		System.out.println("Request submitted successfully.");
 		// end-user-code
 	}
 
 	public void displayErrorMessage() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	public void enterInfo() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
+		System.out.println("Error submitting request.");
 		// end-user-code
 	}
 }

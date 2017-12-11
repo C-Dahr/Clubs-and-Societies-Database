@@ -7,6 +7,7 @@ public class CreateClubRequestMain {
 		CreateClubRequestControl control = new CreateClubRequestControl(dm);
 		CreateClubRequestUI ui = new CreateClubRequestUI(control);
 		
+		ui.displayCreateClubRequestForm();
 	}
 
 }
