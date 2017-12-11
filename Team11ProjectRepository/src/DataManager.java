@@ -10,8 +10,7 @@ import java.util.HashMap;
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
+ * @author tharvey2
  */
 public class DataManager {
 	Connection connection = null;
@@ -44,13 +43,13 @@ public class DataManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private MainAdminAccounts mainAdminAccounts;
+	private MainAdminAccountObject mainAdminAccounts;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private ClubAdminAccounts clubAdminAccounts;
+	private ClubAdminAccountObject clubAdminAccounts;
 
 	/*
 	 * Constructor
@@ -133,10 +132,36 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList getClubsFromFilterSearch(ArrayList parameters) {
+	public ArrayList<ClubObject> getClubsFromFilterSearch(ArrayList<String> keywords) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ClubObject> clubList = new ArrayList<ClubObject>();
+		try {
+			Statement st = connection.createStatement();
+			
+			String sqlQuery = "SELECT * FROM Clubs WHERE ";
+			for(int i = 0; i < keywords.size(); i++) {
+				if (i < keywords.size() - 1) 
+					sqlQuery += "Name LIKE '%" + keywords.get(i) + "%' OR Description LIKE '%" + keywords.get(i) + "%' OR ";
+				else
+					sqlQuery += "Name LIKE '%" + keywords.get(i) + "%' OR Description LIKE '%" + keywords.get(i) + "%';";
+			}
+			
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			while (rs.next()) {
+				ClubObject club = new ClubObject();
+				club.name = rs.getString(1);
+				club.description = rs.getString(2);
+				club.location = rs.getString(3);
+				club.clubAdmin = rs.getString(4);
+				clubList.add(club);				
+			}
+		} catch (SQLException e) {
+			System.err.println("SQL error: getClubsFromFilterSearch");
+		}
+		
+		return clubList;
 		// end-user-code
 	}
 
@@ -183,10 +208,23 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public Object getClubAdminAccount(String id, String password) {
+	public ClubAdminAccountObject getClubAdminAccount(String id, String password) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ClubAdminAccountObject account = null;
+		try {
+			Statement st = connection.createStatement();
+		
+			String sqlQuery = "SELECT * FROM ClubAdminAccounts WHERE id = '" + id + "' AND password = '" + password + "';";
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			account = new ClubAdminAccountObject(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));		
+		}
+		catch (SQLException e) {
+			System.err.println("SQL error: getClubAdminAccount");
+		}
+		
+		return account;
 		// end-user-code
 	}
 
@@ -441,18 +479,24 @@ public class DataManager {
 		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param id
-	 * @param password
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public Object getMainAdminAccount(String id, String password) {
+	public MainAdminAccountObject getMainAdminAccount(String id, String password) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		MainAdminAccountObject account = null;
+		try {
+			Statement st = connection.createStatement();
+		
+			String sqlQuery = "SELECT * FROM MainAdminAccounts WHERE id = '" + id + "' AND password = '" + password + "';";
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			account = new MainAdminAccountObject(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));		
+		}
+		catch (SQLException e) {
+			System.err.println("SQL error: getMainAdminAccount");
+		}
+		
+		return account;
+			
 		// end-user-code
 	}
 }
