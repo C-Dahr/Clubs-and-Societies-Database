@@ -44,14 +44,25 @@ public class RemoveClubServlet extends HttpServlet {
 		 DataManager dm = new DataManager();
 		 RemoveClubControl control = new RemoveClubControl(dm);
          PrintWriter writer = response.getWriter();
-        
+         MainAdminAccountObject admin;
          ArrayList<ClubInfoObject > clubs = control.getAllClubs();
         
          //Generate response HTML file
+         try {
+     		HttpSession session=request.getSession(false); 
+            admin =(MainAdminAccountObject) session.getAttribute("User");
+         }catch(Exception e){
+            admin = null;
+         }
+         if (admin == null) {
+     			 writer.println("You are not logged into a main admin account.<br>");
+     			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
+      			 writer.println("<p><a href=LoginUI.html> Login </a> </p>");
+     	}else {
          if (clubs.size() == 0)
                      writer.println("No clubs were found. <br>");
          else {
-        	 		 writer.println("<form action=RemovedClubServlet method=post>")
+        	 		 writer.println("<form action=RemovedClubServlet.java method=post>");
                      writer.println("<p> Choose a Club to Remove: </p>");
         	 		 writer.println("<p>");
                      for(int i = 0; i < clubs.size(); i++) {
