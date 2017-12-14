@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DataManager;
-import BrowseClubsControl;
+import ManageClubAdminAccessControl;
 
 /**
- * Servlet implementation class BrowseClubsServlet
+ * Servlet implementation class ManageClubAdminAccessServlet
  */
-@WebServlet("/BrowseClubsServlet")
-public class BrowseClubsServlet extends HttpServlet {
+@WebServlet("/ManageClubAdminAccessServlet")
+public class ManageClubAdminAccess extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BrowseClubsServlet() {
+    public ManageClubAdminAccessServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,22 +42,22 @@ public class BrowseClubsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 DataManager dm = new DataManager();
-         BrowseClubsControl control = new BrowseClubsControl(dm);
+		 ManageClubAdminAccessControl control = new ManageClubAdminAccessControl(dm);
          PrintWriter writer = response.getWriter();
         
        
 
-         ArrayList<ClubInfoObject > clubs = control.getAllClubs();
+         ArrayList<ClubAdminRequestObject> requests = control.processGetAdminRequests();
         
          //Generate response HTML file
-         if (clubs.size() == 0)
-                     writer.println("No clubs were found. <br>");
+         if (requests.size() == 0)
+                     writer.println("No club admin requests were found. <br>");
          else {
-        	 		 writer.println("<form action=ViewClubInfoServlet method=post>");
-                     writer.println("<p> Browse Clubs: </p>");
+        	 		 writer.println("<form action=ViewClubAdminRequestServlet method=post>");
+                     writer.println("<p> Club Admin Requests: </p>");
         	 		 writer.println("<p>");
-                     for(int i = 0; i < clubs.size(); i++) {
-                                 writer.println(clubs[i].name + "<button name='club' type='submit' value='" + clubs[i].name +"'>View Info</button><br>");
+                     for(int i = 0; i < requests.size(); i++) {
+                                 writer.println(requests[i].username + "<button name='request' type='submit' value='" + requests[i].requestID +"'>View Info</button><br>");
                      }
                      writer.println("</p>");
                      writer.println("</form>");

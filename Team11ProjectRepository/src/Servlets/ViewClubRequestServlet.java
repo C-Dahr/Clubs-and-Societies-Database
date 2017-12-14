@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpSession;
 
 import DataManager;
-import ViewClubInfoControl;
+import CreateClubControl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ViewClubInfoServlet
+ * Servlet implementation class ViewClubRequestServlet
  */
-@WebServlet("/ViewClubInfoServlet")
-public class ViewClubInfoServlet extends HttpServlet {
+@WebServlet("/ViewClubRequestServlet")
+public class ViewClubRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewClubInfoServlet() {
+    public ViewClubRequestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,17 +42,24 @@ public class ViewClubInfoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataManager dm = new DataManager();
-		ViewClubInfoControl control = new ViewClubInfoControl(dm);
+		CreateClubControl control = new CreateClubControl(dm);
         PrintWriter writer = response.getWriter();
         
-        String clubName;
-        String[] clubList = request.getParameterValues("club");
-        clubName = clubList[0];
-        ClubInfoObject club = control.processViewClubInfo();
-        writer.println("<h1> " + club.name + "'s Info Page</h1>");
-		writer.println("<p>Club Name: " + club.name  + " </p>");
-		writer.println("<p>Description: " + club.description + " </p>");
-		writer.println("<p>Location: " + club.location + "</p>");
+        String requestID;
+        String[] requestList = request.getParameterValues("request");
+        requestID = requestList[0];
+        ClubRequestObject request = dm.getClubRequestByID(requestID);
+        writer.println("<h1> " + request.clubName + "'s Request Page</h1>");
+		writer.println("<p>Club Name: " + request.clubName  + " </p>");
+		writer.println("<p>Description: " + request.description + " </p>");
+		writer.println("<p>Location: " + request.location + "</p>");
+		writer.println("<form action=ProcessClubRequestServlet method=post>");
+		HttpSession session = request.getSession();
+		session.setAttribute("ClubRequest",request);
+		writer.println("<button name='status' type='submit' value='" + true +"'>Approve</button><br>");
+		writer.println("<button name='status' type='submit' value='" + false +"'>Delete</button><br>");
+		writer.println("</form>");
+		writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
 		writer.println("<p><a href=MainUI.html> Home </a> </p>");
 	}
 
