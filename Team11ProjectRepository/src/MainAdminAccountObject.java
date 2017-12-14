@@ -8,18 +8,16 @@
  * @author dmccardl
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class ViewClubInfoControl {
+public class MainAdminAccountObject extends AccountObject {
 
-	private DataManager dataManager;
-
-	public ViewClubInfoControl(DataManager dm) {
-		this.dataManager = dm;
+	public MainAdminAccountObject (String idIn, String passwordIn, String firstNameIn, String lastNameIn, String emailIn) {
+		super(idIn, passwordIn, firstNameIn, lastNameIn, emailIn);
 	}
 
-	public ClubObject processViewClubInfo(String clubName) {
+	public void sql() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return dataManager.getClubByClubName(clubName);
+
 		// end-user-code
 	}
 }

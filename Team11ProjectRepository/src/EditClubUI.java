@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * 
  */
@@ -9,65 +11,46 @@
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class EditClubUI {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private EditClubControl editClubControl;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private LoginUI loginUI;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	private EditClubControl editClubControl;
+	
+	public EditClubUI(EditClubControl control) {
+		this.editClubControl = control;
+	}
+
 	public void displayEditClubForm() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter new club name: ");
+		String newClubName = sc.nextLine();
+		System.out.println("Enter new club description: ");
+		String newClubDesc = sc.nextLine();
+		System.out.println("Enter new club location: ");
+		String newLocation = sc.nextLine();
+		
+		sc.close();
+		
+		editClubControl.processEditClub(newClubName, newClubDesc, newLocation);
+		displayConfirmation();
 		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param result
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void displayConfirmation(boolean result) {
+	public void displayConfirmation() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
+		System.out.println("Request successfully completed.");
 		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void exit() {
+	public boolean enterInfo() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-
-		// end-user-code
-	}
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void enterInfo() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
+		System.out.println("What is your club name?:");
+		Scanner sc = new Scanner(System.in);
+		String clubName = sc.nextLine();
+		sc.close();
+		return editClubControl.checkForClub(clubName);
 		// end-user-code
 	}
 }

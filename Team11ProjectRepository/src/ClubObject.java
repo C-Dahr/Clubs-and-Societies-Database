@@ -8,18 +8,23 @@
  * @author dmccardl
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
-public class ViewClubInfoControl {
+public class ClubObject {
 
-	private DataManager dataManager;
+	public String id;
+	
+	public String name;
 
-	public ViewClubInfoControl(DataManager dm) {
-		this.dataManager = dm;
-	}
+	public String description;
 
-	public ClubObject processViewClubInfo(String clubName) {
+	public String location;
+
+	public String clubAdmin;
+	
+
+	public void sql() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return dataManager.getClubByClubName(clubName);
+
 		// end-user-code
 	}
 }
