@@ -2,7 +2,6 @@
  * 
  */
 
-import java.util.HashMap;
 
 /** 
  * <!-- begin-UML-doc -->
@@ -13,15 +12,23 @@ import java.util.HashMap;
 public class EditClubControl {
 
 	private DataManager dataManager;
-	
-	public EditClubControl(DataManager dmIn) {
-		dataManager = dmIn;
+	private String clubToEdit = null;
+
+	public EditClubControl(DataManager dm) {
+		this.dataManager = dm;
 	}
-	
-	public void processEditClub(String clubName, HashMap formInfo) {
+	public void processEditClub(String nameIn, String descIn, String locationIn) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		
+		dataManager.updateClubInfo(clubToEdit, nameIn, descIn, locationIn);
 		// end-user-code
+	}
+	public boolean checkForClub(String clubName) {
+		ClubObject club = dataManager.getClubByClubName(clubName);
+		if(club == null) {
+			return false;
+		}
+		clubToEdit = club.name;
+		return true;
 	}
 }
