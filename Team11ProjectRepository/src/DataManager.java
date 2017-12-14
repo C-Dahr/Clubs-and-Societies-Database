@@ -1,59 +1,10 @@
-/**
- * 
- */
 import java.sql.*;
-import java.util.*;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author tharvey2
- */
 public class DataManager {
-	Connection connection = null;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private ClubObject clubs;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private ClubEvents clubEvents;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private ClubAdminRequestObject clubAdminRequests;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private ClubRequestObject clubRequests;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private MainAdminAccountObject mainAdminAccounts;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private ClubAdminAccountObject clubAdminAccounts;
 
-	/*
-	 * Constructor
-	 */
+	Connection connection = null;
+
 	public DataManager() {
 		 try {
 	         Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -68,16 +19,7 @@ public class DataManager {
 		}
 	}
 	
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param adminRequest
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public boolean setNewAdminRequest(ClubAdminRequestObject adminRequest) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		boolean result = false;
 		try {
 			Statement st = connection.createStatement();
@@ -85,7 +27,7 @@ public class DataManager {
 			//create query string
 			String sqlQuery = "INSERT INTO ClubAdminRequests VALUES('" + adminRequest.requestID + "',"
 														+ " '" + adminRequest.nameOfRequestSender + "',"
-														+ " '" + adminRequest.id + "',"
+														+ " '" + adminRequest.username + "',"
 														+ " '" + adminRequest.password + "',"
 														+ "'" + adminRequest.firstName + "',"
 														+ "'" + adminRequest.lastName + "',"
@@ -102,18 +44,9 @@ public class DataManager {
 			System.err.println("SQL error: setNewClubAdminRequest");
 		}
 		return result;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public ArrayList<ClubObject> getAllClubs() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		ArrayList<ClubObject> clubsList = new ArrayList<ClubObject>();
 		
 		try {
@@ -143,21 +76,9 @@ public class DataManager {
 		}
 		
 		return clubsList;
-	
-
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param parameters
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public ArrayList<ClubObject> getClubsFromFilterSearch(ArrayList<String> keywords) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		ArrayList<ClubObject> clubList = new ArrayList<ClubObject>();
 		try {
 			Statement st = connection.createStatement();
@@ -185,19 +106,10 @@ public class DataManager {
 		}
 		
 		return clubList;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubName
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public ClubObject getClubByClubName(String clubName) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+
 		ClubObject club = new ClubObject();
 		
 		try {
@@ -220,16 +132,9 @@ public class DataManager {
 		}
 		
 		return club;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-  */
 	public ClubAdminAccountObject getClubAdminAccount(String id, String password) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		ClubAdminAccountObject account = null;
 		try {
 			Statement st = connection.createStatement();
@@ -244,19 +149,9 @@ public class DataManager {
 		}
 		
 		return account;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param createClubRequest
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public boolean setNewCreateClubRequest(ClubRequestObject clubRequestIn) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		boolean result = false;
 		try {
 			Statement st = connection.createStatement();
@@ -279,19 +174,9 @@ public class DataManager {
 		}
 		
 		return result;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * @param clubName
-	 * @param formInfo
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void updateClubInfo(String oldName, String newName, String newDesc, String newLocation) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
 		ClubObject oldInfo = getClubByClubName(oldName);
 		String id = oldInfo.id;
 		try {
@@ -309,18 +194,10 @@ public class DataManager {
 		catch (SQLException e) {
 			System.err.println("SQL error: updateClubInfo");
 		}
-		// end-user-code
+
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public ArrayList<ClubAdminRequestObject> getAllAdminRequests() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		ArrayList<ClubAdminRequestObject> requestList = new ArrayList<ClubAdminRequestObject>();
 		
 		try {
@@ -350,19 +227,9 @@ public class DataManager {
 		}
 		
 		return requestList;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param id
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public boolean removeAdminRequest(String id) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		boolean result = false;
 		try {
 			Statement st = connection.createStatement();
@@ -380,19 +247,9 @@ public class DataManager {
 		}
 		
 		return result;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubAdminInfo
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public boolean setNewClubAdmin(ClubAdminAccountObject clubAdmin) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		boolean result = false;
 		try {
 			Statement st = connection.createStatement();
@@ -403,7 +260,7 @@ public class DataManager {
 														+ " '" + clubAdmin.firstName + "',"
 														+ " '" + clubAdmin.lastName + "',"
 														+ "'" + clubAdmin.email + "',"
-														+ "'" + clubAdmin.club + "');";
+														+ "'" + clubAdmin.clubName + "');";
 			
 			//execute SQL query
 			st.executeQuery(sqlQuery);
@@ -415,18 +272,9 @@ public class DataManager {
 			System.err.println("SQL error: setNewClubAdmin");
 		}
 		return result;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public ArrayList<ClubRequestObject> getAllClubRequests() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		ArrayList<ClubRequestObject> requestList = new ArrayList<ClubRequestObject>();
 		
 		try {
@@ -453,11 +301,9 @@ public class DataManager {
 		}
 		
 		return requestList;
-		// end-user-code
 	}
 	
 	public ClubAdminRequestObject getClubAdminRequestByID(String requestId) {
-		
 		ClubAdminRequestObject request = null;
 		
 		try {
@@ -487,7 +333,6 @@ public class DataManager {
 	}
 	
 	public ClubRequestObject getClubRequestByID(String id) {
-		
 		ClubRequestObject request = null;
 		
 		try {
@@ -513,17 +358,7 @@ public class DataManager {
 		return request;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param suggestedClubName
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public boolean removeClubRequest(String id) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		boolean result = false;
+	public void removeClubRequest(String id) {
 		try {
 			Statement st = connection.createStatement();
 			
@@ -533,27 +368,13 @@ public class DataManager {
 			//execute SQL query
 			st.executeQuery(sqlQuery);
 			
-			result = true;
 		}
 		catch (SQLException e) {
 			System.err.println("SQL error: removeClubRequest");
 		}
-		
-		return result;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubInfo
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public boolean setNewClub(ClubObject clubIn) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		boolean result = false;
+	public void setNewClub(ClubObject clubIn) {
 		try {
 			Statement st = connection.createStatement();
 			
@@ -566,25 +387,12 @@ public class DataManager {
 			
 			//execute SQL query
 			st.executeQuery(sqlQuery);
-			
-			result = true;
-
 		} 
 		catch (SQLException e) {
 			System.err.println("SQL error: setNewClub");
 		}
-		
-		return result;
-		// end-user-code
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubName
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public boolean removeClub(String clubName) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -593,8 +401,6 @@ public class DataManager {
 	}
 
 	public MainAdminAccountObject getMainAdminAccount(String id, String password) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		MainAdminAccountObject account = null;
 		try {
 			Statement st = connection.createStatement();
@@ -609,7 +415,5 @@ public class DataManager {
 		}
 		
 		return account;
-			
-		// end-user-code
 	}
 }
