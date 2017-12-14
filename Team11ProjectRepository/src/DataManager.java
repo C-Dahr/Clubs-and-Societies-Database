@@ -393,13 +393,6 @@ public class DataManager {
 		}
 	}
 
-	public boolean removeClub(String clubName) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return false;
-		// end-user-code
-	}
-
 	public MainAdminAccountObject getMainAdminAccount(String id, String password) {
 		MainAdminAccountObject account = null;
 		try {
