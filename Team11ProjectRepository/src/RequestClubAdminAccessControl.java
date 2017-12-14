@@ -5,7 +5,7 @@
 /** 
  * <!-- begin-UML-doc -->
  * <!-- end-UML-doc -->
- * @author dmccardl
+ * @author tharvey2
  * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
  */
 public class RequestClubAdminAccessControl {
@@ -16,17 +16,13 @@ public class RequestClubAdminAccessControl {
 	 */
 	private DataManager dataManager;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param formInfo
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public boolean processFormSubmission(Object formInfo) {
+	public RequestClubAdminAccessControl(DataManager dm) {
+		this.dataManager = dm;
+	}
+	public boolean processFormSubmission(ClubAdminRequestObject formInfo) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		return dataManager.setNewAdminRequest(formInfo);
 		// end-user-code
 	}
 }

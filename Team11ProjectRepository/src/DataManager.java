@@ -31,7 +31,7 @@ public class DataManager {
 	 * <!-- end-UML-doc -->
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	private ClubAdminRequests clubAdminRequests;
+	private ClubAdminRequestObject clubAdminRequests;
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
@@ -75,10 +75,33 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean setNewAdminRequest(Object adminRequest) {
+	public boolean setNewAdminRequest(ClubAdminRequestObject adminRequest) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "INSERT INTO ClubAdminRequests VALUES('" + adminRequest.requestID + "',"
+														+ " '" + adminRequest.nameOfRequestSender + "',"
+														+ " '" + adminRequest.id + "',"
+														+ " '" + adminRequest.password + "',"
+														+ "'" + adminRequest.firstName + "',"
+														+ "'" + adminRequest.lastName + "',"
+														+ "'" + adminRequest.email + "',"
+														+ "'" + adminRequest.clubName + "');";
+			
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+			
+			result = true;
+
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: setNewClubAdminRequest");
+		}
+		return result;
 		// end-user-code
 	}
 
@@ -203,11 +226,7 @@ public class DataManager {
 	/** 
 	 * <!-- begin-UML-doc -->
 	 * <!-- end-UML-doc -->
-	 * @param id
-	 * @param password
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+  */
 	public ClubAdminAccountObject getClubAdminAccount(String id, String password) {
 		// begin-user-code
 		// TODO Auto-generated method stub
@@ -265,7 +284,6 @@ public class DataManager {
 
 	/** 
 	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
 	 * @param clubName
 	 * @param formInfo
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
@@ -300,10 +318,38 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public ArrayList getAllAdminRequests() {
+	public ArrayList<ClubAdminRequestObject> getAllAdminRequests() {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ClubAdminRequestObject> requestList = new ArrayList<ClubAdminRequestObject>();
+		
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "SELECT * FROM ClubAdminRequests;";
+			
+			//execute SQL query
+			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			//convert retrieved rows to clubInfoObject[]
+			while (rs.next()) {
+				ClubAdminRequestObject clubAdminRequest = new ClubAdminRequestObject(rs.getString(1),
+															   rs.getString(2), 
+															   rs.getString(3), 
+															   rs.getString(4),
+															   rs.getString(5),
+															   rs.getString(6),
+															   rs.getString(7),
+															   rs.getString(8));
+				requestList.add(clubAdminRequest);
+			}
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: getAllClubAdminRequests");
+		}
+		
+		return requestList;
 		// end-user-code
 	}
 
@@ -317,7 +363,23 @@ public class DataManager {
 	public boolean removeAdminRequest(String id) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "DELETE FROM ClubAdminRequests WHERE requestId = '" + id + "';";
+		
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+			
+			result = true;
+		}
+		catch (SQLException e) {
+			System.err.println("SQL error: removeAdminRequest");
+		}
+		
+		return result;
 		// end-user-code
 	}
 
@@ -328,10 +390,31 @@ public class DataManager {
 	 * @return
 	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
 	 */
-	public boolean setNewClubAdmin(Object clubAdminInfo) {
+	public boolean setNewClubAdmin(ClubAdminAccountObject clubAdmin) {
 		// begin-user-code
 		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "INSERT INTO ClubAdmins VALUES('" + clubAdmin.id + "',"
+														+ " '" + clubAdmin.password + "',"
+														+ " '" + clubAdmin.firstName + "',"
+														+ " '" + clubAdmin.lastName + "',"
+														+ "'" + clubAdmin.email + "',"
+														+ "'" + clubAdmin.club + "');";
+			
+			//execute SQL query
+			st.executeQuery(sqlQuery);
+			
+			result = true;
+
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: setNewClubAdmin");
+		}
+		return result;
 		// end-user-code
 	}
 
@@ -371,6 +454,36 @@ public class DataManager {
 		
 		return requestList;
 		// end-user-code
+	}
+	
+	public ClubAdminRequestObject getClubAdminRequestByID(String requestId) {
+		
+		ClubAdminRequestObject request = null;
+		
+		try {
+			Statement st = connection.createStatement();
+			
+			//create query string
+			String sqlQuery = "SELECT * FROM ClubAdminRequests WHERE id = '" + requestId + "';";
+			
+			//execute SQL query
+			ResultSet rs = st.executeQuery(sqlQuery);
+		
+			request = new ClubAdminRequestObject(rs.getString(1),
+											rs.getString(2), 
+											rs.getString(3), 
+											rs.getString(4),
+											rs.getString(5),
+											rs.getString(6),
+											rs.getString(7),
+											rs.getString(8));
+			
+		} 
+		catch (SQLException e) {
+			System.err.println("SQL error: getClubAdminRequestByID");
+		}
+		
+		return request;
 	}
 	
 	public ClubRequestObject getClubRequestByID(String id) {
