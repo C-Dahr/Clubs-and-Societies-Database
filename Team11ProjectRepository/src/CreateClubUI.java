@@ -1,21 +1,9 @@
-/**
- * 
- */
-
 import java.util.Scanner;
 import java.util.ArrayList;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class CreateClubUI {
 
 	private CreateClubControl createClubControl;
-
-	private LoginUI loginUI;
 	
 	public CreateClubUI(CreateClubControl control) {
 		this.createClubControl = control;
@@ -57,8 +45,6 @@ public class CreateClubUI {
 	}
 
 	private void displayClubRequests(ArrayList<ClubRequestObject> clubRequestsIn) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		if (clubRequestsIn.size() == 0) 
 			System.out.println("No requests found.");
 		else {
@@ -70,7 +56,6 @@ public class CreateClubUI {
 				System.out.println();
 			}
 		}
-		// end-user-code
 	}
 	
 	private void displayClubRequestInfo(String idToView, ArrayList<ClubRequestObject> requestIn) {
@@ -91,9 +76,6 @@ public class CreateClubUI {
 	}
 
 	public void displayConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		System.out.println("Request completed successfully!");
-		// end-user-code
 	}
 }

@@ -1,15 +1,6 @@
-/**
- * 
- */
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author tharvey2
- */
 public class SearchClubsUI {
 
 	private SearchClubsControl searchClubsControl;
@@ -18,15 +9,10 @@ public class SearchClubsUI {
 		this.searchClubsControl = controlIn;
 	}
 	public void displaySearchForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		System.out.println("Enter one or more keywords and end with '0'.");
-		// end-user-code
 	}
 
 	public void displayRetrievedClubs(ArrayList<ClubObject> clubs) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		if(clubs.size() == 0)
 			displayNoClubsFoundMessage();
 		else {
@@ -35,19 +21,13 @@ public class SearchClubsUI {
 				System.out.println("Club name: " + clubs.get(i).name);
 			}
 		}
-		// end-user-code
 	}
 
 	public void displayNoClubsFoundMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		System.out.println("No clubs were found matching your search keywords.");
-		// end-user-code
 	}
 
 	public void enterFilters() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<String> keywordList = new ArrayList<String>();
 		while (true) {
@@ -60,6 +40,5 @@ public class SearchClubsUI {
 		ArrayList<ClubObject> club = searchClubsControl.processSearch(keywordList);
 
 		displayRetrievedClubs(club);
-		// end-user-code
 	}
 }

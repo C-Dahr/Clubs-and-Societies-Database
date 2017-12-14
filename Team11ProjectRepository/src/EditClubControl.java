@@ -1,14 +1,3 @@
-/**
- * 
- */
-
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author tharvey2
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class EditClubControl {
 
 	private DataManager dataManager;
@@ -17,12 +6,11 @@ public class EditClubControl {
 	public EditClubControl(DataManager dm) {
 		this.dataManager = dm;
 	}
+	
 	public void processEditClub(String nameIn, String descIn, String locationIn) {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		dataManager.updateClubInfo(clubToEdit, nameIn, descIn, locationIn);
-		// end-user-code
 	}
+	
 	public boolean checkForClub(String clubName) {
 		ClubObject club = dataManager.getClubByClubName(clubName);
 		if(club == null) {

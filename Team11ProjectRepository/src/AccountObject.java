@@ -1,11 +1,11 @@
 
 public class AccountObject {
 
-	public Object id;
-	public Object password;
-	public Object firstName;
-	public Object lastName;
-	public Object email;
+	public String id;
+	public String password;
+	public String firstName;
+	public String lastName;
+	public String email;
 	
 	public AccountObject (String idIn, String passwordIn, String firstNameIn, String lastNameIn, String emailIn) {
 		id = idIn;

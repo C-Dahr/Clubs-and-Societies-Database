@@ -1,15 +1,4 @@
 import java.util.Scanner;
-
-/**
- * 
- */
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class CreateClubRequestUI {
 
 	private CreateClubRequestControl createClubRequestControl;
@@ -19,8 +8,6 @@ public class CreateClubRequestUI {
 	}
 
 	public void displayCreateClubRequestForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter suggested club name: ");
 		String newClubName = sc.nextLine();
@@ -40,20 +27,13 @@ public class CreateClubRequestUI {
 		else {
 			displayErrorMessage();
 		}
-		// end-user-code
 	}
 
 	public void displayConfirmation() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		System.out.println("Request submitted successfully.");
-		// end-user-code
 	}
 
 	public void displayErrorMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
 		System.out.println("Error submitting request.");
-		// end-user-code
 	}
 }

@@ -1,4 +1,3 @@
-
 public class SearchClubsMain {
 
 	public static void main(String[] args) {
@@ -8,7 +7,6 @@ public class SearchClubsMain {
 		
 		ui.displaySearchForm();
 		ui.enterFilters();
-
 	}
 
 }
