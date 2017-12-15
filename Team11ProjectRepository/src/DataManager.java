@@ -140,8 +140,10 @@ public class DataManager {
 		try {
 			Statement st = connection.createStatement();
 		
-			String sqlQuery = "SELECT * FROM ClubAdminAccounts WHERE id = '" + id + "' AND password = '" + password + "';";
+			String sqlQuery = "SELECT * FROM ClubAdminAccounts WHERE username = '" + id + "' AND password = '" + password + "';";
 			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			rs.next();
 			
 			account = new ClubAdminAccountObject(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));		
 		}
@@ -399,7 +401,7 @@ public class DataManager {
 		try {
 			Statement st = connection.createStatement();
 		
-			String sqlQuery = "SELECT * FROM MainAdminAccounts WHERE id = '" + id + "' AND password = '" + password + "';";
+			String sqlQuery = "SELECT * FROM MainAdminAccounts WHERE username = '" + id + "' AND password = '" + password + "';";
 			ResultSet rs = st.executeQuery(sqlQuery);
 			
 			account = new MainAdminAccountObject(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));		

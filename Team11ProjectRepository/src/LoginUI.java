@@ -26,7 +26,7 @@ public class LoginUI {
 		String password = sc.next();
 		AccountObject account = loginControl.processLogin(id,password);
 		
-		if(account.id == null)
+		if(account == null)
 			displayLoginFailedMessage();
 		else
 			displayConfirmation();
