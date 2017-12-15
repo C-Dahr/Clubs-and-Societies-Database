@@ -17,7 +17,9 @@ public class CreateClubControl {
 		newClub.location = request.location;
 		newClub.clubAdmin = request.nameOfRequestSender;
 		
-		dataManager.setNewClub(newClub);
+		String[] strings = request.nameOfRequestSender.split("\\s+");
+		
+		dataManager.setNewClub(newClub, strings[0]);
 		dataManager.removeClubRequest(requestID);
 	}
 

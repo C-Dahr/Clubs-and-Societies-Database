@@ -387,7 +387,7 @@ public class DataManager {
 		}
 	}
 
-	public void setNewClub(ClubObject clubIn) {
+	public void setNewClub(ClubObject clubIn, String clubAdminFirstName) {
 		try {
 			Statement st = connection.createStatement();
 			
@@ -400,6 +400,10 @@ public class DataManager {
 			
 			//execute SQL query
 			st.executeUpdate(sqlQuery);
+			
+			//set name of the new club to the admin
+			String sqlQuery2 = "UPDATE ClubAdminAccounts SET clubName = '" + clubIn.name + "' WHERE firstName = '" + clubAdminFirstName + "';";
+			st.executeUpdate(sqlQuery2);
 		} 
 		catch (SQLException e) {
 			System.err.println("SQL error: setNewClub");
