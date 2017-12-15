@@ -30,7 +30,7 @@ public class ViewOrderStatusServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataManager dm = new DataManager();
-        ViewOrderStatusControl control = new ViewOrderStatusControl(dm);
+
         PrintWriter writer = response.getWriter();
         ClubAdminAccountObject clubAdmin;
         try {

@@ -44,7 +44,7 @@ public class BrowseClubsServlet extends HttpServlet {
         
        
 
-         ArrayList<ClubInfoObject > clubs = control.getAllClubs();
+         ArrayList<ClubObject > clubs = control.getAllClubs();
         
          //Generate response HTML file
          if (clubs.size() == 0)

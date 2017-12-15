@@ -39,7 +39,7 @@ public class EditClubServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataManager dm = new DataManager();
-		ChangedClubControl control = new ChangedClubControl(dm);
+		EditClubControl control = new EditClubControl(dm);
         PrintWriter writer = response.getWriter();
         ClubAdminAccountObject clubAdmin;
         try {

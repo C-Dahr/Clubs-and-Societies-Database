@@ -45,7 +45,7 @@ public class ViewClubInfoServlet extends HttpServlet {
         String clubName;
         String[] clubList = request.getParameterValues("club");
         clubName = clubList[0];
-        ClubInfoObject club = control.processViewClubInfo();
+        ClubObject club = control.processViewClubInfo();
         writer.println("<h1> " + club.name + "'s Info Page</h1>");
 		writer.println("<p>Club Name: " + club.name  + " </p>");
 		writer.println("<p>Description: " + club.description + " </p>");

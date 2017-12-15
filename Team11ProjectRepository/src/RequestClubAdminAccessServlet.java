@@ -55,7 +55,7 @@ public class RequestClubAdminAccessServlet extends HttpServlet {
         email = emailList[0];
    
 
-        ClubAdminRequests request = new ClubAdminRequests(firstName,lastName,userName,password,email);
+        ClubAdminRequestObject request = new ClubAdminRequestObject(firstName,lastName,userName,password,email);
         boolean result = control.processFormSubmission();
        
         //Generate response HTML file

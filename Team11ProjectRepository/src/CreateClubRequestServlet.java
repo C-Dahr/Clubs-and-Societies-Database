@@ -50,7 +50,7 @@ public class CreateClubRequestServlet extends HttpServlet {
         description = descriptionList[0];
         location = locationList[0];
 
-        ClubRequests request = new ClubRequests(clubName,description,location);
+        ClubRequestObject request = new ClubRequestObject(clubName,description,location);
         boolean result = control.processCreateClubRequest();
        
         //Generate response HTML file
