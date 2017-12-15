@@ -95,10 +95,11 @@ public class DataManager {
 			
 			while (rs.next()) {
 				ClubObject club = new ClubObject();
-				club.name = rs.getString(1);
-				club.description = rs.getString(2);
-				club.location = rs.getString(3);
-				club.clubAdmin = rs.getString(4);
+				club.id = rs.getString(1);
+				club.name = rs.getString(2);
+				club.description = rs.getString(3);
+				club.location = rs.getString(4);
+				club.clubAdmin = rs.getString(5);
 				clubList.add(club);				
 			}
 		} catch (SQLException e) {
@@ -158,10 +159,10 @@ public class DataManager {
 			
 			//create query string
 			String sqlQuery = "INSERT INTO ClubRequests VALUES('" + clubRequestIn.requestID + "',"
-														+ " '" + clubRequestIn.clubName + "',"
+														+ " '" + clubRequestIn.nameOfRequestSender + "',"
 														+ " '" + clubRequestIn.description + "',"
 														+ "'" + clubRequestIn.location + "',"
-														+ "'" + clubRequestIn.nameOfRequestSender + "');";
+														+ "'" + clubRequestIn.clubName + "');";
 			
 			//execute SQL query
 			st.executeQuery(sqlQuery);
@@ -255,7 +256,7 @@ public class DataManager {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "INSERT INTO ClubAdmins VALUES('" + clubAdmin.id + "',"
+			String sqlQuery = "INSERT INTO ClubAdminAccounts VALUES('" + clubAdmin.id + "',"
 														+ " '" + clubAdmin.password + "',"
 														+ " '" + clubAdmin.firstName + "',"
 														+ " '" + clubAdmin.lastName + "',"
