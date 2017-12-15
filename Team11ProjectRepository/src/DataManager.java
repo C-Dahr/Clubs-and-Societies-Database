@@ -4,6 +4,10 @@ import java.util.ArrayList;
 public class DataManager {
 
 	Connection connection = null;
+	
+	public static int currentClubRequestId = 0;
+	public static int currentClubAdminRequestId = 0;
+	public static int currentClubId = 0;
 
 	public DataManager() {
 		 try {
@@ -25,7 +29,7 @@ public class DataManager {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "INSERT INTO ClubAdminRequests VALUES('" + adminRequest.requestID + "',"
+			String sqlQuery = "INSERT INTO ClubAdminRequests VALUES('" + ++currentClubAdminRequestId + "',"
 														+ " '" + adminRequest.nameOfRequestSender + "',"
 														+ " '" + adminRequest.username + "',"
 														+ " '" + adminRequest.password + "',"
@@ -35,7 +39,7 @@ public class DataManager {
 														+ "'" + adminRequest.clubName + "');";
 			
 			//execute SQL query
-			st.executeQuery(sqlQuery);
+			st.executeUpdate(sqlQuery);
 			
 			result = true;
 
@@ -86,9 +90,9 @@ public class DataManager {
 			String sqlQuery = "SELECT * FROM Clubs WHERE ";
 			for(int i = 0; i < keywords.size(); i++) {
 				if (i < keywords.size() - 1) 
-					sqlQuery += "Name LIKE '%" + keywords.get(i) + "%' OR Description LIKE '%" + keywords.get(i) + "%' OR ";
+					sqlQuery += "name LIKE '%" + keywords.get(i) + "%' OR description LIKE '%" + keywords.get(i) + "%' OR ";
 				else
-					sqlQuery += "Name LIKE '%" + keywords.get(i) + "%' OR Description LIKE '%" + keywords.get(i) + "%';";
+					sqlQuery += "name LIKE '%" + keywords.get(i) + "%' OR description LIKE '%" + keywords.get(i) + "%';";
 			}
 			
 			ResultSet rs = st.executeQuery(sqlQuery);
@@ -117,10 +121,12 @@ public class DataManager {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "SELECT * FROM Clubs WHERE Name = '" + clubName + "';";
+			String sqlQuery = "SELECT * FROM Clubs WHERE name = '" + clubName + "';";
 			
 			//execute SQL query
 			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			rs.next();
 			
 			club.id = rs.getString(1);
 			club.name = rs.getString(2);
@@ -160,14 +166,14 @@ public class DataManager {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "INSERT INTO ClubRequests VALUES('" + clubRequestIn.requestID + "',"
+			String sqlQuery = "INSERT INTO ClubRequests VALUES('" + ++currentClubRequestId + "',"
 														+ " '" + clubRequestIn.nameOfRequestSender + "',"
 														+ " '" + clubRequestIn.description + "',"
 														+ "'" + clubRequestIn.location + "',"
 														+ "'" + clubRequestIn.clubName + "');";
 			
 			//execute SQL query
-			st.executeQuery(sqlQuery);
+			st.executeUpdate(sqlQuery);
 			
 			result = true;
 
@@ -186,13 +192,13 @@ public class DataManager {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "UPDATE Clubs SET Name = '" + newName + "',"
-								+ " Description = '" + newDesc + "',"
-								+ " Location = '" + newLocation + "'"
+			String sqlQuery = "UPDATE Clubs SET name = '" + newName + "',"
+								+ " description = '" + newDesc + "',"
+								+ " location = '" + newLocation + "'"
 										+ "WHERE id = '" + id + "';";
 			
 			//execute SQL query
-			st.executeQuery(sqlQuery);
+			st.executeUpdate(sqlQuery);
 		} 
 		catch (SQLException e) {
 			System.err.println("SQL error: updateClubInfo");
@@ -238,10 +244,10 @@ public class DataManager {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "DELETE FROM ClubAdminRequests WHERE requestId = '" + id + "';";
+			String sqlQuery = "DELETE FROM ClubAdminRequests WHERE id = '" + id + "';";
 		
 			//execute SQL query
-			st.executeQuery(sqlQuery);
+			st.executeUpdate(sqlQuery);
 			
 			result = true;
 		}
@@ -266,7 +272,7 @@ public class DataManager {
 														+ "'" + clubAdmin.clubName + "');";
 			
 			//execute SQL query
-			st.executeQuery(sqlQuery);
+			st.executeUpdate(sqlQuery);
 			
 			result = true;
 
@@ -317,6 +323,8 @@ public class DataManager {
 			
 			//execute SQL query
 			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			rs.next();
 		
 			request = new ClubAdminRequestObject(rs.getString(1),
 											rs.getString(2), 
@@ -347,6 +355,8 @@ public class DataManager {
 			//execute SQL query
 			ResultSet rs = st.executeQuery(sqlQuery);
 		
+			rs.next();
+			
 			request = new ClubRequestObject(rs.getString(1),
 											rs.getString(2), 
 											rs.getString(3), 
@@ -369,7 +379,7 @@ public class DataManager {
 			String sqlQuery = "DELETE FROM ClubRequests WHERE id = '" + id + "';";
 		
 			//execute SQL query
-			st.executeQuery(sqlQuery);
+			st.executeUpdate(sqlQuery);
 			
 		}
 		catch (SQLException e) {
@@ -382,14 +392,14 @@ public class DataManager {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "INSERT INTO Clubs VALUES('" + clubIn.id + "',"
+			String sqlQuery = "INSERT INTO Clubs VALUES('" + ++currentClubId + "',"
 														+ " '" + clubIn.name + "',"
 														+ " '" + clubIn.description + "',"
 														+ "'" + clubIn.location + "',"
 														+ "'" + clubIn.clubAdmin + "');";
 			
 			//execute SQL query
-			st.executeQuery(sqlQuery);
+			st.executeUpdate(sqlQuery);
 		} 
 		catch (SQLException e) {
 			System.err.println("SQL error: setNewClub");

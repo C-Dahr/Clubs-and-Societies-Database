@@ -5,7 +5,9 @@ public class ManageClubAdminAccessMain {
 		ManageClubAdminAccessControl control = new ManageClubAdminAccessControl(dm);
 		ManageClubAdminAccessUI ui = new ManageClubAdminAccessUI(control);
 		
-		ui.displayAdminRequests();
-		ui.chooseOptions();
+		boolean result = ui.displayAdminRequests();
+		if(result) {
+			ui.chooseOptions();
+		}
 	}
 }

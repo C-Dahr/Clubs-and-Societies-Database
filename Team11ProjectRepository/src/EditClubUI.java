@@ -10,17 +10,19 @@ public class EditClubUI {
 
 	public void displayEditClubForm() {
 		Scanner sc = new Scanner(System.in);
+
 		System.out.println("Enter new club name: ");
 		String newClubName = sc.nextLine();
 		System.out.println("Enter new club description: ");
 		String newClubDesc = sc.nextLine();
 		System.out.println("Enter new club location: ");
 		String newLocation = sc.nextLine();
-		
+			
 		sc.close();
 		
 		editClubControl.processEditClub(newClubName, newClubDesc, newLocation);
 		displayConfirmation();
+		
 	}
 
 	public void displayConfirmation() {
@@ -31,7 +33,7 @@ public class EditClubUI {
 		System.out.println("What is your club name?:");
 		Scanner sc = new Scanner(System.in);
 		String clubName = sc.nextLine();
-		sc.close();
+
 		return editClubControl.checkForClub(clubName);
 	}
 }

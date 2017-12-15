@@ -18,7 +18,7 @@ public class CreateClubRequestUI {
 		
 		sc.close();
 		
-		ClubRequestObject formInfo = new ClubRequestObject("id", "name", newClubName, newClubDesc, newLocation);
+		ClubRequestObject formInfo = new ClubRequestObject("id", "name",  newClubDesc, newLocation, newClubName);
 		
 		boolean result = createClubRequestControl.processCreateClubRequest(formInfo);
 		if(result) {

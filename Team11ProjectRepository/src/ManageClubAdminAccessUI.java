@@ -9,18 +9,23 @@ public class ManageClubAdminAccessUI {
 		manageClubAdminAccessControl = control;
 	}
 	
-	public void displayAdminRequests() {
+	public boolean displayAdminRequests() {
 		ArrayList<ClubAdminRequestObject> requests = manageClubAdminAccessControl.processGetAdminRequests();
 		
-		if(requests.size() == 0)
+		if(requests.size() == 0) {
 			System.out.println("No requests found.");
+			return false;
+		}
+			
+		
 		else {
 			System.out.println("Club Administrator Requests:");
 			for(int i = 0; i < requests.size(); i++) {
-				System.out.println("Request ID: " + requests.get(i).username);
+				System.out.println("Request ID: " + requests.get(i).requestID);
 				System.out.println("Name of Sender: " + requests.get(i).firstName + " " + requests.get(i).lastName);
 				System.out.println("Name of Club: " + requests.get(i).clubName);
 			}
+			return true;
 		}
 	}
 	
