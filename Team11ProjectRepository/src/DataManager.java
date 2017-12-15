@@ -154,7 +154,7 @@ public class DataManager {
 			account = new ClubAdminAccountObject(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));		
 		}
 		catch (SQLException e) {
-			System.err.println("SQL error: getClubAdminAccount");
+			System.err.println("SQL error: no club admin account found.");
 		}
 		
 		return account;
@@ -413,6 +413,8 @@ public class DataManager {
 		
 			String sqlQuery = "SELECT * FROM MainAdminAccounts WHERE username = '" + id + "' AND password = '" + password + "';";
 			ResultSet rs = st.executeQuery(sqlQuery);
+			
+			rs.next();
 			
 			account = new MainAdminAccountObject(rs.getString(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));		
 		}
