@@ -1,4 +1,4 @@
-package Servlets;
+
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DataManager;
 /**
  * Servlet implementation class ViewOrderStatusServlet
  */
@@ -31,7 +30,7 @@ public class ViewOrderStatusServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataManager dm = new DataManager();
-        ViewOrderStatusControl control = new ViewOrderStatusControl(dm);
+
         PrintWriter writer = response.getWriter();
         ClubAdminAccountObject clubAdmin;
         try {

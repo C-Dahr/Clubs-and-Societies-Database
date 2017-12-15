@@ -1,12 +1,9 @@
-package Servlets;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.servlet.http.HttpSession;
-
-import DataManager;
-import LoginControl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class CreateClubRequestServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/CreateClubRequestServlet")
+public class CreateClubRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public CreateClubRequestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,28 +39,30 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataManager dm = new DataManager();
-        LoginControl control = new LoginControl(dm);
+        CreateClubRequestControl control = new CreateClubRequestControl(dm);
         PrintWriter writer = response.getWriter();
        
-        String userName;
-        String password;
-        String[] userNameList = request.getParameterValues("loginid");
-        String[] passwordList = request.getParameterValues("password");
-        userName = userNameList[0];
-        password = passwordList[0];
+        String clubName, description, location;
+        String[] clubNameList = request.getParameterValues("clubName");
+        String[] descriptionList = request.getParameterValues("description");
+        String[] locationList = request.getParameterValues("location");
+        clubName = clubNameList[0];
+        description = descriptionList[0];
+        location = locationList[0];
 
-        AccountObject account = control.processLogin(userName, password);
+        ClubRequestObject request = new ClubRequestObject(clubName,description,location);
+        boolean result = control.processCreateClubRequest();
        
         //Generate response HTML file
-        if (account == null) {
-                    writer.println("Login Failed <br>");
-                    writer.println("<p> If you do not have a club admin account and wish to create one click the link below <br/> <a href=RequestClubAdminAccessForm.html> Request Club Admin Access </a> </p>");
+        if (result == false) {
+                    writer.println("Club Request Submission Failed <br>");
+                    writer.println("<p>Form may not have been filled out properly or name is already taken</p>");
+                    writer.println("<p><a href=CreateClubRequestForm.html> Try Again </a> </p>");
                     writer.println("<p><a href=MainUI.html> Home </a> </p>");
-        			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
+        			
         }else{
-                    writer.println("<p> Login Successful </p>");
-                    HttpSession session=request.getSession(); 
-                    session.setAttribute("User", account);
+        			writer.println("Club Request Submission Succeeded <br>");
+                    writer.println("<p> Please wait for an admin to approve your request. An email will be sent when it has either be approved or denied.</p>");
                     writer.println("<p><a href=MainUI.html> Home </a> </p>");
         }
 	}
