@@ -11,9 +11,9 @@ public class DataManager {
 	     } catch (Exception e) {
 	      System.err.println(e.toString());
 	     }
-		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/dmccardl";
+		String url = "jdbc:mysql://cs2043.cs.unb.ca:3306/cs2043team11";
 		try {
-		connection = DriverManager.getConnection(url, "dmccardl", "ZZ3Af3RC");
+		connection = DriverManager.getConnection(url, "cs2043team11", "UVoP6FF3");
 		} catch (SQLException e) {
 		System.err.println("Database connection error.");
 		}
