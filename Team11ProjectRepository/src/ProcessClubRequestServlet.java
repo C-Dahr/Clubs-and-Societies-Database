@@ -1,12 +1,9 @@
-package Servlets;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.servlet.http.HttpSession;
-
-import DataManager;
-import CreateClubControl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

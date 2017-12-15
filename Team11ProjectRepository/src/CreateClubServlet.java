@@ -1,4 +1,4 @@
-package Servlets;
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -10,20 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DataManager;
-import BrowseClubsControl;
 
 /**
- * Servlet implementation class BrowseClubsServlet
+ * Servlet implementation class CreateClubServlet
  */
-@WebServlet("/BrowseClubsServlet")
-public class BrowseClubsServlet extends HttpServlet {
+@WebServlet("/CreateClubServlet")
+public class CreateClubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BrowseClubsServlet() {
+    public CreateClubServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,22 +40,22 @@ public class BrowseClubsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		 DataManager dm = new DataManager();
-         BrowseClubsControl control = new BrowseClubsControl(dm);
+         CreateClubControl control = new CreateClubControl(dm);
          PrintWriter writer = response.getWriter();
         
        
 
-         ArrayList<ClubInfoObject > clubs = control.getAllClubs();
+         ArrayList<ClubRequestObject> requests = control.processDisplayClubRequests();
         
          //Generate response HTML file
-         if (clubs.size() == 0)
-                     writer.println("No clubs were found. <br>");
+         if (requests.size() == 0)
+                     writer.println("No club requests were found. <br>");
          else {
-        	 		 writer.println("<form action=ViewClubInfoServlet method=post>");
-                     writer.println("<p> Browse Clubs: </p>");
+        	 		 writer.println("<form action=ViewClubRequestServlet method=post>");
+                     writer.println("<p> Club Requests: </p>");
         	 		 writer.println("<p>");
-                     for(int i = 0; i < clubs.size(); i++) {
-                                 writer.println(clubs[i].name + "<button name='club' type='submit' value='" + clubs[i].name +"'>View Info</button><br>");
+                     for(int i = 0; i < requests.size(); i++) {
+                                 writer.println(requests[i].clubName + "<button name='request' type='submit' value='" + requests[i].requestID +"'>View Info</button><br>");
                      }
                      writer.println("</p>");
                      writer.println("</form>");
