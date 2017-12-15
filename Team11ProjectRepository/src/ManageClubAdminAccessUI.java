@@ -1,52 +1,55 @@
-/**
- * 
- */
-
 import java.util.ArrayList;
+import java.util.*;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class ManageClubAdminAccessUI {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private ManageClubAdminAccessControl manageClubAdminAccessControl;
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	private LoginUI loginUI;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param adminRequests
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void displayAdminRequests(ArrayList adminRequests) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public ManageClubAdminAccessUI (ManageClubAdminAccessControl control) {
+		manageClubAdminAccessControl = control;
+	}
+	
+	public boolean displayAdminRequests() {
+		ArrayList<ClubAdminRequestObject> requests = manageClubAdminAccessControl.processGetAdminRequests();
+		
+		if(requests.size() == 0) {
+			System.out.println("No requests found.");
+			return false;
+		}
+			
+		
+		else {
+			System.out.println("Club Administrator Requests:");
+			for(int i = 0; i < requests.size(); i++) {
+				System.out.println("Request ID: " + requests.get(i).requestID);
+				System.out.println("Name of Sender: " + requests.get(i).firstName + " " + requests.get(i).lastName);
+				System.out.println("Name of Club: " + requests.get(i).clubName);
+			}
+			return true;
+		}
+	}
+	
+	public void chooseOptions() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Which request would you like to view? (enter request ID):");
+		String requestName = sc.next();
+		System.out.println("Would you like to Approve (1) or Remove (2) the aministrator request?:");
+		int option = sc.nextInt();
+		sc.close();
+		
+		boolean success = false;
+		if(option == 1)
+			success = manageClubAdminAccessControl.processNewAdmin(requestName);
+		else if(option == 2)
+			success = manageClubAdminAccessControl.processDenyAdmin(requestName);
+		
+		displayConfirmation(success);
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param result
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void displayConfirmation(boolean result) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		if(result)
+			System.out.println("Request completed successfully!");
+		else
+			System.out.println("Incorrect input.");
 	}
 }

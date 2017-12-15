@@ -1,34 +1,22 @@
-/**
- * 
- */
-
-import java.util.HashMap;
-
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class EditClubControl {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private DataManager dataManager;
+	private String clubToEdit = null;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubName
-	 * @param formInfo
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void processEditClub(String clubName, HashMap formInfo) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public EditClubControl(DataManager dm) {
+		this.dataManager = dm;
+	}
+	
+	public void processEditClub(String nameIn, String descIn, String locationIn) {
+		dataManager.updateClubInfo(clubToEdit, nameIn, descIn, locationIn);
+	}
+	
+	public boolean checkForClub(String clubName) {
+		ClubObject club = dataManager.getClubByClubName(clubName);
+		if(club == null) {
+			return false;
+		}
+		clubToEdit = club.name;
+		return true;
 	}
 }

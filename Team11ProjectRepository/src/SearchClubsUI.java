@@ -1,69 +1,44 @@
-/**
- * 
- */
-
 import java.util.ArrayList;
+import java.util.Scanner;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class SearchClubsUI {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private SearchClubsControl searchClubsControl;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	public SearchClubsUI(SearchClubsControl controlIn) {
+		this.searchClubsControl = controlIn;
+	}
 	public void displaySearchForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Enter one or more keywords and end with '0'.");
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param clubs
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void displayRetrievedClubs(ArrayList clubs) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void displayRetrievedClubs(ArrayList<ClubObject> clubs) {
+		if(clubs.size() == 0)
+			displayNoClubsFoundMessage();
+		else {
+			System.out.println("Club Search Results:");
+			for(int i = 0; i < clubs.size(); i++) {
+				System.out.println("Club name: " + clubs.get(i).name);
+			}
+		}
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void displayNoClubsFoundMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("No clubs were found matching your search keywords.");
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void enterFilters() {
-		// begin-user-code
-		// TODO Auto-generated method stub
+		Scanner scanner = new Scanner(System.in);
+		ArrayList<String> keywordList = new ArrayList<String>();
+		while (true) {
+			String keyword = scanner.next();
+			if(keyword.equals("0")) break;
+			keywordList.add(keyword);
+		}
+		scanner.close();
+		
+		ArrayList<ClubObject> club = searchClubsControl.processSearch(keywordList);
 
-		// end-user-code
+		displayRetrievedClubs(club);
 	}
 }

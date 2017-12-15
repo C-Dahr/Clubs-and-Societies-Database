@@ -1,31 +1,30 @@
-/**
- * 
- */
+import java.util.Scanner;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class ViewClubInfoUI {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private ViewClubInfoControl viewClubInfoControl;
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param club
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void displayClubInfo(Object club) {
-		// begin-user-code
-		// TODO Auto-generated method stub
+	public ViewClubInfoUI(ViewClubInfoControl control) {
+		this.viewClubInfoControl = control;
+	}
 
-		// end-user-code
+	public void displayClubInfo(ClubObject club) {
+		System.out.println();
+		System.out.println("----------------------------------------");
+		System.out.println("Club name: " + club.name);
+		System.out.println("Description: " + club.description); 
+		System.out.println("Location: " + club.location);
+		System.out.println("Club Leader: " + club.clubAdmin);
+		System.out.println("----------------------------------------");
+	}
+	
+	public void selectClub() {
+		System.out.println("Enter a club name to view: ");
+		Scanner sc = new Scanner(System.in);
+		String clubName = sc.nextLine();
+		sc.close();
+		
+		ClubObject club = viewClubInfoControl.processViewClubInfo(clubName);
+		displayClubInfo(club);
 	}
 }

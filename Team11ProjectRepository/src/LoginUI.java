@@ -1,67 +1,36 @@
-/**
- * 
- */
+import java.util.Scanner;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class LoginUI {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+	
 	private LoginControl loginControl;
+	
+	public LoginUI (LoginControl controlIn) {
+		loginControl = controlIn;
+	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void displayLoginForm() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Enter username and password separated by space: ");
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param result
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public void displayConfirmation(boolean result) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+	public void displayConfirmation() {
+		System.out.println("Login confirmed.");
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void displayLoginFailedMessage() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		System.out.println("Login failed. Account not found.");
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
 	public void enterLoginInfo() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-
-		// end-user-code
+		Scanner sc = new Scanner(System.in);
+		String id = sc.next();
+		String password = sc.next();
+		AccountObject account = loginControl.processLogin(id,password);
+		
+		if(account == null)
+			displayLoginFailedMessage();
+		else
+			displayConfirmation();
+		
+		sc.close();
 	}
 }

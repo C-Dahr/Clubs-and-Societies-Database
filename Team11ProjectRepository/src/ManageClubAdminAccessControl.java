@@ -1,61 +1,29 @@
-/**
- * 
- */
-
 import java.util.ArrayList;
 
-/** 
- * <!-- begin-UML-doc -->
- * <!-- end-UML-doc -->
- * @author dmccardl
- * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
- */
 public class ManageClubAdminAccessControl {
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
+
 	private DataManager dataManager;
-
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public ArrayList processGetAdminRequests() {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return null;
-		// end-user-code
+	
+	public ManageClubAdminAccessControl(DataManager dm) {
+		dataManager = dm;
+	}
+	public ArrayList<ClubAdminRequestObject> processGetAdminRequests() {
+		return dataManager.getAllAdminRequests();
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param adminName
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public boolean processNewAdmin(Object adminName) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return false;
-		// end-user-code
+	public boolean processNewAdmin(String requestId) {
+
+		ClubAdminRequestObject request = dataManager.getClubAdminRequestByID(requestId);
+		
+		ClubAdminAccountObject newClubAdmin = new ClubAdminAccountObject(request.username, request.password, request.firstName, request.lastName, request.email);
+		
+		boolean result = dataManager.setNewClubAdmin(newClubAdmin);
+		dataManager.removeAdminRequest(requestId);
+		
+		return result;
 	}
 
-	/** 
-	 * <!-- begin-UML-doc -->
-	 * <!-- end-UML-doc -->
-	 * @param adminName
-	 * @return
-	 * @generated "UML to Java (com.ibm.xtools.transform.uml2.java5.internal.UML2JavaTransform)"
-	 */
-	public boolean processDenyAdmin(String adminName) {
-		// begin-user-code
-		// TODO Auto-generated method stub
-		return false;
-		// end-user-code
+	public boolean processDenyAdmin(String requestId) {
+		return dataManager.removeAdminRequest(requestId);
 	}
 }
