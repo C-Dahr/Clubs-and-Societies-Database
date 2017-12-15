@@ -48,9 +48,11 @@ public class ChangedClubServlet extends HttpServlet {
         description = descriptionList[0];
         location = locationList[0];
         
+        ClubAdminAccountObject clubAdmin;
+        
         try {
-		HttpSession session=request.getSession(false); 
-        clubAdmin =(ClubAdminAccountObject) session.getAttribute("User");
+        	HttpSession session=request.getSession(false); 
+        	clubAdmin = (ClubAdminAccountObject) session.getAttribute("User");
         }catch(Exception e){
         	clubAdmin = null;
         }
@@ -59,9 +61,9 @@ public class ChangedClubServlet extends HttpServlet {
 			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
  			 writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
-			control.processEditClub(clubAdmin.name,description,location);
-			writer.println("Edit Club Succesful <br>");
-            writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			 control.processEditClub(clubAdmin.clubName, description, location);
+			 writer.println("Edit Club Succesful <br>");
+             writer.println("<p><a href=MainUI.html> Home </a> </p>");
 		}
 	}
 

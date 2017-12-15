@@ -43,8 +43,8 @@ public class EditClubServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         ClubAdminAccountObject clubAdmin;
         try {
-		HttpSession session=request.getSession(false); 
-        clubAdmin =(ClubAdminAccountObject) session.getAttribute("User");
+        	HttpSession session=request.getSession(false); 
+        	clubAdmin =(ClubAdminAccountObject) session.getAttribute("User");
         }catch(Exception e){
         	clubAdmin = null;
         }
@@ -55,9 +55,9 @@ public class EditClubServlet extends HttpServlet {
 		}else {
 			writer.println("<h1> UNB CSDB Create Club Request Form </h1>");
 			writer.println("<form action=ChangedClubServlet method=Post>");
-			writer.println("<p>Club Name: " + clubAdmin.club + " </p>");
-			writer.println("<p>Description:  <input type=text name=description value=" + dm.getClubByClubName(clubAdmin.club).description + " size=40></p>");
-			writer.println("<p>Location:  <input type=text name=location value=" + dm.getClubByClubName(clubAdmin.club).location + " size=40></p>");
+			writer.println("<p>Club Name: " + clubAdmin.clubName + " </p>");
+			writer.println("<p>Description:  <input type=text name=description value=" + dm.getClubByClubName(clubAdmin.clubName).description + " size=40></p>");
+			writer.println("<p>Location:  <input type=text name=location value=" + dm.getClubByClubName(clubAdmin.clubName).location + " size=40></p>");
 			writer.println("<p><input type=submit value=Submit></p>");
 			writer.println("</form>");
 			writer.println("<p><a href=MainUI.html> Home </a> </p>");

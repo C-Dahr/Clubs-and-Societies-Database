@@ -47,15 +47,15 @@ public class ProcessClubAdminRequestServlet extends HttpServlet {
         status = statusList[0];
         
 		HttpSession session=request.getSession(false); 
-        ClubAdminRequestObject request =(ClubAdminRequestObject) session.getAttribute("ClubAdminRequest");
+        ClubAdminRequestObject adminRequest =(ClubAdminRequestObject) session.getAttribute("ClubAdminRequest");
       
         if (status.equals("true")){
-        	control.processNewAdmin(request.requestID);
+        	control.processNewAdmin(adminRequest.requestID);
 			 writer.println("Club Admin successfully created<br>");
 			 writer.println("<p><a href=ManageClubAdminAccessServlet.java> Manage Club Admin Requests </a> </p>");
 			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
 		}else {
-			control.processDenyAdmin(request.requestID);
+			control.processDenyAdmin(adminRequest.requestID);
 			writer.println("Club Admin Request deleted <br>");
 			writer.println("<p><a href=ManageClubAdminAccessServlet.java> Manage Club Admin Requests </a> </p>");
             writer.println("<p><a href=MainUI.html> Home </a> </p>");

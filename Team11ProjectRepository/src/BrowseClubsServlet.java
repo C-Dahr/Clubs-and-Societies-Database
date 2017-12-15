@@ -1,4 +1,4 @@
-
+import 
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -44,7 +44,7 @@ public class BrowseClubsServlet extends HttpServlet {
         
        
 
-         ArrayList<ClubObject > clubs = control.getAllClubs();
+         ArrayList<ClubObject > clubs = control.processBrowseClubs();
         
          //Generate response HTML file
          if (clubs.size() == 0)
@@ -54,7 +54,7 @@ public class BrowseClubsServlet extends HttpServlet {
                      writer.println("<p> Browse Clubs: </p>");
         	 		 writer.println("<p>");
                      for(int i = 0; i < clubs.size(); i++) {
-                                 writer.println(clubs[i].name + "<button name='club' type='submit' value='" + clubs[i].name +"'>View Info</button><br>");
+                                 writer.println(clubs.get(i).name + "<button name='club' type='submit' value='" + clubs.get(i).name +"'>View Info</button><br>");
                      }
                      writer.println("</p>");
                      writer.println("</form>");

@@ -47,15 +47,15 @@ public class ProcessClubRequestServlet extends HttpServlet {
         status = statusList[0];
         
 		HttpSession session=request.getSession(false); 
-        ClubRequestObject request =(ClubRequestObject) session.getAttribute("ClubRequest");
+        ClubRequestObject clubRequest =(ClubRequestObject) session.getAttribute("ClubRequest");
       
         if (status.equals("true")){
-        	control.processApproval(request.requestID);
+        	control.processApproval(clubRequest.requestID);
 			 writer.println("Club successfully created<br>");
 			 writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
 			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
 		}else {
-			control.processRemoval(request.requestID);
+			control.processRemoval(clubRequest.requestID);
 			writer.println("Club Request Deleted <br>");
 			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
             writer.println("<p><a href=MainUI.html> Home </a> </p>");

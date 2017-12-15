@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ManageClubAdminAccessServlet
  */
 @WebServlet("/ManageClubAdminAccessServlet")
-public class ManageClubAdminAccess extends HttpServlet {
+public class ManageClubAdminAccessServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -54,7 +54,7 @@ public class ManageClubAdminAccess extends HttpServlet {
                      writer.println("<p> Club Admin Requests: </p>");
         	 		 writer.println("<p>");
                      for(int i = 0; i < requests.size(); i++) {
-                                 writer.println(requests[i].username + "<button name='request' type='submit' value='" + requests[i].requestID +"'>View Info</button><br>");
+                                 writer.println(requests.get(i).username + "<button name='request' type='submit' value='" + requests.get(i).requestID +"'>View Info</button><br>");
                      }
                      writer.println("</p>");
                      writer.println("</form>");

@@ -32,14 +32,14 @@ public class ViewOrderStatusServlet extends HttpServlet {
         PrintWriter writer = response.getWriter();
         MainAdminAccountObject mainAdmin;
         try {
-		HttpSession session=request.getSession(false); 
-        mainAdmin =(MainAdminAccountObject) session.getAttribute("User");
+        	HttpSession session=request.getSession(false); 
+        	mainAdmin =(MainAdminAccountObject) session.getAttribute("User");
         }catch(Exception e){
         	mainAdmin = null;
         }
 		if (mainAdmin == null) {
-			 writer.println("You are not logged into a main admin account.<br>");
-			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			writer.println("You are not logged into a main admin account.<br>");
+			writer.println("<p><a href=MainUI.html> Home </a> </p>");
  			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
 			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests <a/> </p>");
