@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import javax.servlet.http.HttpSession;
 
-import DataManager;
-import ChangedClubControl;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
