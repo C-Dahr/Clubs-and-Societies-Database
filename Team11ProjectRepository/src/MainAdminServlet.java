@@ -1,4 +1,4 @@
-package Servlets;
+
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,23 +33,21 @@ public class ViewOrderStatusServlet extends HttpServlet {
 		DataManager dm = new DataManager();
         ViewOrderStatusControl control = new ViewOrderStatusControl(dm);
         PrintWriter writer = response.getWriter();
-        ClubAdminAccountObject clubAdmin;
+        MainAdminAccountObject mainAdmin;
         try {
 		HttpSession session=request.getSession(false); 
-        clubAdmin =(ClubAdminAccountObject) session.getAttribute("User");
+        mainAdmin =(MainAdminAccountObject) session.getAttribute("User");
         }catch(Exception e){
-        	clubAdmin = null;
+        	mainAdmin = null;
         }
-		if (clubAdmin == null) {
-			 writer.println("You are not logged into a club admin account.<br>");
+		if (mainAdmin == null) {
+			 writer.println("You are not logged into a main admin account.<br>");
 			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
  			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
-			if (clubAdmin.club == ""){
-				writer.println("<p><a href=CreateClubRequestForm.html> Create a Club Request <a/> </p>");
-			}else{
-				writer.println("<p><a href=EditClubServlet.java> Edit your Club <a/> </p>");
-			}
+			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests <a/> </p>");
+			writer.println("<p><a href=RemoveClubServlet.java> Remove a Club <a/> </p>");
+			writer.println("<p><a href=ManageClubAdminRequestServlet.java> Manage Club Admin Requests <a/> </p>");
 		}
 	}
 

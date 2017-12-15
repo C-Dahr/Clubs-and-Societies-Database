@@ -1,4 +1,4 @@
-package Servlets;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ViewClubRequestServlet
+ * Servlet implementation class ProcessClubRequestServlet
  */
-@WebServlet("/ViewClubRequestServlet")
-public class ViewClubRequestServlet extends HttpServlet {
+@WebServlet("/ProcessClubRequestServlet")
+public class ProcessClubRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewClubRequestServlet() {
+    public ProcessClubRequestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,22 +45,23 @@ public class ViewClubRequestServlet extends HttpServlet {
 		CreateClubControl control = new CreateClubControl(dm);
         PrintWriter writer = response.getWriter();
         
-        String requestID;
-        String[] requestList = request.getParameterValues("request");
-        requestID = requestList[0];
-        ClubRequestObject request = dm.getClubRequestByID(requestID);
-        writer.println("<h1> " + request.clubName + "'s Request Page</h1>");
-		writer.println("<p>Club Name: " + request.clubName  + " </p>");
-		writer.println("<p>Description: " + request.description + " </p>");
-		writer.println("<p>Location: " + request.location + "</p>");
-		writer.println("<form action=ProcessClubRequestServlet method=post>");
-		HttpSession session = request.getSession();
-		session.setAttribute("ClubRequest",request);
-		writer.println("<button name='status' type='submit' value='" + true +"'>Approve</button><br>");
-		writer.println("<button name='status' type='submit' value='" + false +"'>Delete</button><br>");
-		writer.println("</form>");
-		writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
-		writer.println("<p><a href=MainUI.html> Home </a> </p>");
+        String status;
+        String[] statusList = request.getParameterValues("status");
+        status = statusList[0];
+        
+		HttpSession session=request.getSession(false); 
+        ClubRequestObject request =(ClubRequestObject) session.getAttribute("ClubRequest");
+      
+        if (status.equals("true")){
+        	control.processApproval(request.requestID);
+			 writer.println("Club successfully created<br>");
+			 writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
+			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
+		}else {
+			control.processRemoval(request.requestID);
+			writer.println("Club Request Deleted <br>");
+			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
+            writer.println("<p><a href=MainUI.html> Home </a> </p>");
+		}
 	}
-
 }

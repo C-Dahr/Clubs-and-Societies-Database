@@ -1,4 +1,4 @@
-package Servlets;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 import javax.servlet.http.HttpSession;
 
 import DataManager;
-import ViewClubInfoControl;
+import RemoveClubControl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ViewClubInfoServlet
+ * Servlet implementation class RemovedClubServlet
  */
-@WebServlet("/ViewClubInfoServlet")
-public class ViewClubInfoServlet extends HttpServlet {
+@WebServlet("/RemovedClubServlet")
+public class RemovedClubServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewClubInfoServlet() {
+    public RemovedClubServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,18 +42,20 @@ public class ViewClubInfoServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DataManager dm = new DataManager();
-		ViewClubInfoControl control = new ViewClubInfoControl(dm);
+		RemoveClubControl control = new RemoveClubControl(dm);
         PrintWriter writer = response.getWriter();
         
         String clubName;
         String[] clubList = request.getParameterValues("club");
         clubName = clubList[0];
-        ClubInfoObject club = control.processViewClubInfo();
-        writer.println("<h1> " + club.name + "'s Info Page</h1>");
-		writer.println("<p>Club Name: " + club.name  + " </p>");
-		writer.println("<p>Description: " + club.description + " </p>");
-		writer.println("<p>Location: " + club.location + "</p>");
-		writer.println("<p><a href=MainUI.html> Home </a> </p>");
+        Boolean result = control.processRemoveClubs(clubName);
+        if(result = true){
+        	writer.println(clubName + "Deleted Succesfully<br>");
+        	writer.println("<p><a href=MainUI.html> Home </a> </p>");
+        }else{
+        	writer.println("<p><a href=RemoveClubServlet.java> Try Again </a> </p>");
+        	writer.println("<p><a href=MainUI.html> Home </a> </p>");
+        }
 	}
 
 }
