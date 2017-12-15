@@ -3,13 +3,21 @@ This is the README file for Cameron Dahr's branch of the Team11Repository We spl
 The code that I actually wrote is in:
 
 ClubAdminServlet.java
+
 LoginServlet.java
+
 MainAdminServlet.java
+
 ManageClubAdminAccessServlet.java
+
 ProcessClubAdminRequestServlet.java
+
 ProcessClubRequestServlet.java 
+
 ViewClubAdminRequestServlet.java  
+
 ViewClubRequestServlet.java 
+
 CreateClubServlet.java
 
 We would tweak each others code so this list is not solely my own work but I wrote most if not all of the above classes.
