@@ -58,12 +58,12 @@ public class ChangedClubServlet extends HttpServlet {
         }
         if (clubAdmin == null) {
 			 writer.println("You are not logged into a club admin account.<br>");
-			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			 writer.println("<p><a href=index.html> Home </a> </p>");
  			 writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
 			 control.processEditClub(clubAdmin.clubName, description, location);
 			 writer.println("Edit Club Succesful <br>");
-             writer.println("<p><a href=MainUI.html> Home </a> </p>");
+             writer.println("<p><a href=index.html> Home </a> </p>");
 		}
 	}
 

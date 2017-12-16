@@ -59,7 +59,7 @@ public class ViewClubRequestServlet extends HttpServlet {
 		writer.println("<button name='status' type='submit' value='" + false +"'>Delete</button><br>");
 		writer.println("</form>");
 		writer.println("<p><a href=ManageClubAdminAccessServlet.java> Manage Club Admin Requests </a> </p>");
-		writer.println("<p><a href=MainUI.html> Home </a> </p>");
+		writer.println("<p><a href=index.html> Home </a> </p>");
 	}
 
 }

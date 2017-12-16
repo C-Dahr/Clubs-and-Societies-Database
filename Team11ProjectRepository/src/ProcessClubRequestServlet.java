@@ -53,12 +53,12 @@ public class ProcessClubRequestServlet extends HttpServlet {
         	control.processApproval(clubRequest.requestID);
 			 writer.println("Club successfully created<br>");
 			 writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
-			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			 writer.println("<p><a href=index.html> Home </a> </p>");
 		}else {
 			control.processRemoval(clubRequest.requestID);
 			writer.println("Club Request Deleted <br>");
 			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
-            writer.println("<p><a href=MainUI.html> Home </a> </p>");
+            writer.println("<p><a href=index.html> Home </a> </p>");
 		}
 	}
 }

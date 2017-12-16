@@ -63,12 +63,12 @@ public class RequestClubAdminAccessServlet extends HttpServlet {
                     writer.println("Club Admin Request Submission Failed <br>");
                     writer.println("<p>Form may not have been filled out properly or user name is already taken</p>");
                     writer.println("<p><a href=RequestClubAdminAccessForm.html> Try Again </a> </p>");
-                    writer.println("<p><a href=MainUI.html> Home </a> </p>");
+                    writer.println("<p><a href=index.html> Home </a> </p>");
         			
         }else{
         			writer.println("Club Admin Request Submission Succeeded <br>");
                     writer.println("<p> Please wait for an admin to approve your request. An email will be sent when it has either be approved or denied.</p>");
-                    writer.println("<p><a href=MainUI.html> Home </a> </p>");
+                    writer.println("<p><a href=index.html> Home </a> </p>");
         }
 	}
 

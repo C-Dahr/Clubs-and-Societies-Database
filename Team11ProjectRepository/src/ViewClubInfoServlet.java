@@ -50,7 +50,7 @@ public class ViewClubInfoServlet extends HttpServlet {
 		writer.println("<p>Club Name: " + club.name  + " </p>");
 		writer.println("<p>Description: " + club.description + " </p>");
 		writer.println("<p>Location: " + club.location + "</p>");
-		writer.println("<p><a href=MainUI.html> Home </a> </p>");
+		writer.println("<p><a href=index.html> Home </a> </p>");
 	}
 
 }

@@ -53,12 +53,12 @@ public class ProcessClubAdminRequestServlet extends HttpServlet {
         	control.processNewAdmin(adminRequest.requestID);
 			 writer.println("Club Admin successfully created<br>");
 			 writer.println("<p><a href=ManageClubAdminAccessServlet.java> Manage Club Admin Requests </a> </p>");
-			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			 writer.println("<p><a href=index.html> Home </a> </p>");
 		}else {
 			control.processDenyAdmin(adminRequest.requestID);
 			writer.println("Club Admin Request deleted <br>");
 			writer.println("<p><a href=ManageClubAdminAccessServlet.java> Manage Club Admin Requests </a> </p>");
-            writer.println("<p><a href=MainUI.html> Home </a> </p>");
+            writer.println("<p><a href=index.html> Home </a> </p>");
 		}
 	}
 }

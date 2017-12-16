@@ -50,8 +50,8 @@ public class EditClubServlet extends HttpServlet {
         }
         if (clubAdmin == null) {
 			 writer.println("You are not logged into a club admin account.<br>");
-			 writer.println("<p><a href=MainUI.html> Home </a> </p>");
  			 writer.println("<p><a href=LoginUI.html> Login </a> </p>");
+ 			 writer.println("<p><a href=index.html> Home </a> </p>");
 		}else {
 			writer.println("<h1> UNB CSDB Create Club Request Form </h1>");
 			writer.println("<form action=ChangedClubServlet method=Post>");
@@ -60,7 +60,7 @@ public class EditClubServlet extends HttpServlet {
 			writer.println("<p>Location:  <input type=text name=location value=" + dm.getClubByClubName(clubAdmin.clubName).location + " size=40></p>");
 			writer.println("<p><input type=submit value=Submit></p>");
 			writer.println("</form>");
-			writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			writer.println("<p><a href=index.html> Home </a> </p>");
 		}
 	}
 

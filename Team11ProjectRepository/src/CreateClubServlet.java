@@ -59,7 +59,7 @@ public class CreateClubServlet extends HttpServlet {
                      }
                      writer.println("</p>");
                      writer.println("</form>");
-                     writer.println("<p><a href=MainUI.html> Home </a> </p>");
+                     writer.println("<p><a href=index.html> Home </a> </p>");
          }
 	}
 

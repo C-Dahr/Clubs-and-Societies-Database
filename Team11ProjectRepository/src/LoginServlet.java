@@ -55,13 +55,13 @@ public class LoginServlet extends HttpServlet {
         if (account == null) {
                     writer.println("Login Failed <br>");
                     writer.println("<p> If you do not have a club admin account and wish to create one click the link below <br/> <a href=RequestClubAdminAccessForm.html> Request Club Admin Access </a> </p>");
-                    writer.println("<p><a href=MainUI.html> Home </a> </p>");
-        			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
+                    writer.println("<p><a href=LoginUI.html> Login </a> </p>");
+                    writer.println("<p><a href=index.html> Home </a> </p>");
         }else{
                     writer.println("<p> Login Successful </p>");
                     HttpSession session=request.getSession(); 
                     session.setAttribute("User", account);
-                    writer.println("<p><a href=MainUI.html> Home </a> </p>");
+                    writer.println("<p><a href=index.html> Home </a> </p>");
         }
 	}
 

@@ -39,7 +39,7 @@ public class ViewOrderStatusServlet extends HttpServlet {
         }
 		if (mainAdmin == null) {
 			writer.println("You are not logged into a main admin account.<br>");
-			writer.println("<p><a href=MainUI.html> Home </a> </p>");
+			writer.println("<p><a href=index.html> Home </a> </p>");
  			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
 			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests <a/> </p>");
