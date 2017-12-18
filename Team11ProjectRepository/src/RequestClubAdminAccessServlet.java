@@ -45,7 +45,7 @@ public class RequestClubAdminAccessServlet extends HttpServlet {
         String firstName, lastName, userName, password, email;
         String[] firstNameList = request.getParameterValues("firstName");
         String[] lastNameList = request.getParameterValues("lastName");
-        String[] userNameList = request.getParameterValues("loginid");
+        String[] userNameList = request.getParameterValues("loginId");
         String[] passwordList = request.getParameterValues("password");
         String[] emailList = request.getParameterValues("email");
         firstName = firstNameList[0];
@@ -55,10 +55,11 @@ public class RequestClubAdminAccessServlet extends HttpServlet {
         email = emailList[0];
    
 
-        ClubAdminRequestObject adminRequest = new ClubAdminRequestObject("id", firstName + lastName, userName, password, firstName, lastName, email, null);
+        ClubAdminRequestObject adminRequest = new ClubAdminRequestObject("id", firstName + " " + lastName, userName, password, firstName, lastName, email, null);
         boolean result = control.processFormSubmission(adminRequest);
        
         //Generate response HTML file
+        writer.println("<!DOCTYPE html><html><body>");
         if (result == false) {
                     writer.println("Club Admin Request Submission Failed <br>");
                     writer.println("<p>Form may not have been filled out properly or user name is already taken</p>");
@@ -70,6 +71,7 @@ public class RequestClubAdminAccessServlet extends HttpServlet {
                     writer.println("<p> Please wait for an admin to approve your request. An email will be sent when it has either be approved or denied.</p>");
                     writer.println("<p><a href=index.html> Home </a> </p>");
         }
+        writer.println("</body></html>");
 	}
 
 }

@@ -47,9 +47,11 @@ public class ManageClubAdminAccessServlet extends HttpServlet {
          ArrayList<ClubAdminRequestObject> requests = control.processGetAdminRequests();
         
          //Generate response HTML file
-         if (requests.size() == 0)
+         writer.println("<!DOCTYPE html><html><body>");
+         if (requests.size() == 0) {
                      writer.println("No club admin requests were found. <br>");
-         else {
+                     writer.println("<p><a href=index.html> Home </a> </p>");
+         }else{
         	 		 writer.println("<form action=ViewClubAdminRequestServlet method=post>");
                      writer.println("<p> Club Admin Requests: </p>");
         	 		 writer.println("<p>");
@@ -60,6 +62,7 @@ public class ManageClubAdminAccessServlet extends HttpServlet {
                      writer.println("</form>");
                      writer.println("<p><a href=index.html> Home </a> </p>");
          }
+         writer.println("</body></html>");
 	}
 
 }

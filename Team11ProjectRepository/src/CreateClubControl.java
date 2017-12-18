@@ -10,17 +10,14 @@ public class CreateClubControl {
 
 	public void processApproval(String requestID) throws NullPointerException {
 		ClubRequestObject request = dataManager.getClubRequestByID(requestID);
-		
 		ClubObject newClub = new ClubObject();
 		newClub.name = request.clubName;
 		newClub.description = request.description;
 		newClub.location = request.location;
 		newClub.clubAdmin = request.nameOfRequestSender;
 		
-		String[] strings = request.nameOfRequestSender.split("\\s+");
-		
-		dataManager.setNewClub(newClub, strings[0]);
-		dataManager.removeClubRequest(requestID);
+		dataManager.setNewClub(newClub, request.nameOfRequestSender);
+		dataManager.removeClubRequest(request.requestID);
 	}
 
 	public void processRemoval(String requestID) throws NullPointerException {

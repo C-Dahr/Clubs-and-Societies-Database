@@ -5,9 +5,6 @@ public class DataManager {
 
 	Connection connection = null;
 	
-	public static int currentClubRequestId = 0;
-	public static int currentClubAdminRequestId = 0;
-	public static int currentClubId = 0;
 
 	public DataManager() {
 		 try {
@@ -28,8 +25,22 @@ public class DataManager {
 		try {
 			Statement st = connection.createStatement();
 			
+			int maxInt;
 			//create query string
-			String sqlQuery = "INSERT INTO ClubAdminRequests VALUES('" + ++currentClubAdminRequestId + "',"
+			try {
+				String maxQuery = "SELECT MAX(id) FROM ClubAdminRequests;";
+				ResultSet rs = st.executeQuery(maxQuery);
+				rs.next();
+				String maxStr = rs.getString(1);
+				maxInt = Integer.parseInt(maxStr);
+				maxInt++;
+			}
+			catch (Exception e) {
+				maxInt = 1;
+			}
+			
+			//create query string
+			String sqlQuery = "INSERT INTO ClubAdminRequests VALUES('" + maxInt + "',"
 														+ " '" + adminRequest.nameOfRequestSender + "',"
 														+ " '" + adminRequest.username + "',"
 														+ " '" + adminRequest.password + "',"
@@ -146,7 +157,7 @@ public class DataManager {
 		try {
 			Statement st = connection.createStatement();
 		
-			String sqlQuery = "SELECT * FROM ClubAdminAccounts WHERE username = '" + id + "' AND password = '" + password + "';";
+			String sqlQuery = "SELECT * FROM ClubAdminAccounts WHERE username = '" + id + "';";
 			ResultSet rs = st.executeQuery(sqlQuery);
 			
 			rs.next();
@@ -165,8 +176,21 @@ public class DataManager {
 		try {
 			Statement st = connection.createStatement();
 			
+			int maxInt;
 			//create query string
-			String sqlQuery = "INSERT INTO ClubRequests VALUES('" + ++currentClubRequestId + "',"
+			try {
+				String maxQuery = "SELECT MAX(id) FROM ClubRequests;";
+				ResultSet rs = st.executeQuery(maxQuery);
+				rs.next();
+				String maxStr = rs.getString(1);
+				maxInt = Integer.parseInt(maxStr);
+				maxInt++;
+			}
+			catch (Exception e) {
+				maxInt = 1;
+			}
+			//create query string
+			String sqlQuery = "INSERT INTO ClubRequests VALUES('" + maxInt + "',"
 														+ " '" + clubRequestIn.nameOfRequestSender + "',"
 														+ " '" + clubRequestIn.description + "',"
 														+ "'" + clubRequestIn.location + "',"
@@ -185,17 +209,15 @@ public class DataManager {
 		return result;
 	}
 
-	public void updateClubInfo(String oldName, String newName, String newDesc, String newLocation) {
-		ClubObject oldInfo = getClubByClubName(oldName);
-		String id = oldInfo.id;
+	public void updateClubInfo(String name, String newDesc, String newLocation) {
 		try {
 			Statement st = connection.createStatement();
 			
 			//create query string
-			String sqlQuery = "UPDATE Clubs SET name = '" + newName + "',"
+			String sqlQuery = "UPDATE Clubs SET name = '" + name + "',"
 								+ " description = '" + newDesc + "',"
 								+ " location = '" + newLocation + "'"
-										+ "WHERE id = '" + id + "';";
+										+ "WHERE name = '"+name+"';";
 			
 			//execute SQL query
 			st.executeUpdate(sqlQuery);
@@ -387,12 +409,26 @@ public class DataManager {
 		}
 	}
 
-	public void setNewClub(ClubObject clubIn, String clubAdminFirstName) {
+	public void setNewClub(ClubObject clubIn, String clubAdminUsername) {
 		try {
 			Statement st = connection.createStatement();
 			
+			int maxInt;
 			//create query string
-			String sqlQuery = "INSERT INTO Clubs VALUES('" + ++currentClubId + "',"
+			try {
+				String maxQuery = "SELECT MAX(id) FROM Clubs;";
+				ResultSet rs = st.executeQuery(maxQuery);
+				rs.next();
+				String maxStr = rs.getString(1);
+				maxInt = Integer.parseInt(maxStr);
+				maxInt++;
+			}
+			catch (Exception e) {
+				maxInt = 1;
+			}
+			
+			
+			String sqlQuery = "INSERT INTO Clubs VALUES('" + maxInt + "',"
 														+ " '" + clubIn.name + "',"
 														+ " '" + clubIn.description + "',"
 														+ "'" + clubIn.location + "',"
@@ -402,7 +438,7 @@ public class DataManager {
 			st.executeUpdate(sqlQuery);
 			
 			//set name of the new club to the admin
-			String sqlQuery2 = "UPDATE ClubAdminAccounts SET clubName = '" + clubIn.name + "' WHERE firstName = '" + clubAdminFirstName + "';";
+			String sqlQuery2 = "UPDATE ClubAdminAccounts SET clubName = '" + clubIn.name + "' WHERE username = '" + clubAdminUsername + "';";
 			st.executeUpdate(sqlQuery2);
 		} 
 		catch (SQLException e) {
@@ -427,5 +463,41 @@ public class DataManager {
 		}
 		
 		return account;
+	}
+	
+	public void updateClubAdminInfo(ClubAdminAccountObject account){
+		try {
+		Statement st = connection.createStatement();
+		String sqlQuery = "SELECT * FROM ClubAdminAccounts WHERE username = '" + account.id + "';";
+		ResultSet rs = st.executeQuery(sqlQuery);
+		rs.next();
+		account.clubName = rs.getString(6);
+		}catch(Exception e) {
+			
+		}
+	}
+	
+	public String getClubDescription(String clubName) {
+		String s = "";
+		try {
+		Statement st = connection.createStatement();
+		String sqlQuery = "SELECT * FROM Clubs WHERE name = '" + clubName + "';";
+		ResultSet rs = st.executeQuery(sqlQuery);
+		rs.next();
+		s = rs.getString(3);
+		}catch(Exception e){}
+		return s;
+	}
+	
+	public String getClubLocation(String clubName) {
+		String s = "";
+		try {
+		Statement st = connection.createStatement();
+		String sqlQuery = "SELECT * FROM Clubs WHERE name = '" + clubName + "';";
+		ResultSet rs = st.executeQuery(sqlQuery);
+		rs.next();
+		s = rs.getString(4);
+		}catch(Exception e){}
+		return s;
 	}
 }

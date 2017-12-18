@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 /**
- * Servlet implementation class ViewOrderStatusServlet
+ * Servlet implementation class MainAdminServlet
  */
-@WebServlet("/ViewOrderStatusServlet")
-public class ViewOrderStatusServlet extends HttpServlet {
+@WebServlet("/MainAdminServlet")
+public class MainAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewOrderStatusServlet() {
+    public MainAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,14 +37,17 @@ public class ViewOrderStatusServlet extends HttpServlet {
         }catch(Exception e){
         	mainAdmin = null;
         }
+        writer.println("<!DOCTYPE html><html><body>");
 		if (mainAdmin == null) {
 			writer.println("You are not logged into a main admin account.<br>");
 			writer.println("<p><a href=index.html> Home </a> </p>");
  			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
-			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests <a/> </p>");
-			writer.println("<p><a href=ManageClubAdminRequestServlet.java> Manage Club Admin Requests <a/> </p>");
+			writer.println("<p><a href=CreateClubServlet> Manage Club Requests <a/> </p>");
+			writer.println("<p><a href=ManageClubAdminAccessServlet> Manage Club Admin Requests <a/> </p>");
+			writer.println("<p><a href=index.html> Home </a> </p>");
 		}
+		writer.println("</body></html>");
 	}
 
 	/**

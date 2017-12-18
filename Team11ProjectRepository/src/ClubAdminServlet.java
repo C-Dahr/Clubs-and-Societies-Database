@@ -1,4 +1,4 @@
-
+import java.sql.*;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class ViewOrderStatusServlet
+ * Servlet implementation class ClubAdminServlet
  */
-@WebServlet("/ViewOrderStatusServlet")
-public class ViewOrderStatusServlet extends HttpServlet {
+@WebServlet("/ClubAdminServlet")
+public class ClubAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewOrderStatusServlet() {
+    public ClubAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +33,28 @@ public class ViewOrderStatusServlet extends HttpServlet {
 
         PrintWriter writer = response.getWriter();
         ClubAdminAccountObject clubAdmin;
+        
         try {
 		HttpSession session=request.getSession(false); 
         clubAdmin =(ClubAdminAccountObject) session.getAttribute("User");
         }catch(Exception e){
         	clubAdmin = null;
         }
+        writer.println("<!DOCTYPE html><html><body>");
 		if (clubAdmin == null) {
 			 writer.println("You are not logged into a club admin account.<br>");
 			 writer.println("<p><a href=index.html> Home </a> </p>");
  			writer.println("<p><a href=LoginUI.html> Login </a> </p>");
 		}else {
-			if (clubAdmin.club == ""){
+			dm.updateClubAdminInfo(clubAdmin);
+			if (clubAdmin.clubName.equals("null")){
 				writer.println("<p><a href=CreateClubRequestForm.html> Create a Club Request <a/> </p>");
 			}else{
-				writer.println("<p><a href=EditClubServlet.java> Edit your Club <a/> </p>");
+				writer.println("<p><a href=EditClubServlet> Edit your Club <a/> </p>");
 			}
+			writer.println("<p><a href=index.html> Home </a> </p>");
 		}
+		writer.println("</body></html>");
 	}
 
 	/**

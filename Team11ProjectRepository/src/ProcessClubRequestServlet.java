@@ -41,24 +41,25 @@ public class ProcessClubRequestServlet extends HttpServlet {
 		DataManager dm = new DataManager();
 		CreateClubControl control = new CreateClubControl(dm);
         PrintWriter writer = response.getWriter();
-        
         String status;
         String[] statusList = request.getParameterValues("status");
         status = statusList[0];
         
 		HttpSession session=request.getSession(false); 
-        ClubRequestObject clubRequest =(ClubRequestObject) session.getAttribute("ClubRequest");
+        String clubRequest =(String) session.getAttribute("ClubRequest");
       
+        writer.println("<!DOCTYPE html><html><body>");
         if (status.equals("true")){
-        	control.processApproval(clubRequest.requestID);
+        	control.processApproval(clubRequest);
 			 writer.println("Club successfully created<br>");
-			 writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
+			 writer.println("<p><a href=CreateClubServlet> Manage Club Requests </a> </p>");
 			 writer.println("<p><a href=index.html> Home </a> </p>");
 		}else {
-			control.processRemoval(clubRequest.requestID);
+			control.processRemoval(clubRequest);
 			writer.println("Club Request Deleted <br>");
-			writer.println("<p><a href=CreateClubServlet.java> Manage Club Requests </a> </p>");
+			writer.println("<p><a href=CreateClubServlet> Manage Club Requests </a> </p>");
             writer.println("<p><a href=index.html> Home </a> </p>");
 		}
+        writer.println("</body></html>");
 	}
 }

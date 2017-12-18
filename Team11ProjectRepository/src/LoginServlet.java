@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
         AccountObject account = control.processLogin(userName, password);
        
         //Generate response HTML file
+        writer.println("<!DOCTYPE html><html><body>");
         if (account == null) {
                     writer.println("Login Failed <br>");
                     writer.println("<p> If you do not have a club admin account and wish to create one click the link below <br/> <a href=RequestClubAdminAccessForm.html> Request Club Admin Access </a> </p>");
@@ -63,6 +64,7 @@ public class LoginServlet extends HttpServlet {
                     session.setAttribute("User", account);
                     writer.println("<p><a href=index.html> Home </a> </p>");
         }
+        writer.println("</body></html>");
 	}
 
 }

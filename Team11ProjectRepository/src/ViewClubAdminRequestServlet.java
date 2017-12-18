@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ViewClubAdminRequestServlet
  */
 @WebServlet("/ViewClubAdminRequestServlet")
-public class ViewClubRequestServlet extends HttpServlet {
+public class ViewClubAdminRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -45,21 +45,24 @@ public class ViewClubRequestServlet extends HttpServlet {
         String requestID;
         String[] requestList = request.getParameterValues("request");
         requestID = requestList[0];
-        ClubAdminRequestObject request = dm.getClubAdminRequestByID(requestID);
-        writer.println("<h1> " + request.firstName + "'s Request Page</h1>");
-        writer.println("<p>Club Name: " + request.firstName  + " </p>");
-        writer.println("<p>Club Name: " + request.lastName  + " </p>");
-        writer.println("<p>Club Name: " + request.email  + " </p>");
-		writer.println("<p>Club Name: " + request.username  + " </p>");
-		writer.println("<p>Description: " + request.clubName + " </p>");
+        ClubAdminRequestObject clubAdminRequest = dm.getClubAdminRequestByID(requestID);
+        writer.println("<!DOCTYPE html><html><body>");
+        writer.println("<h1> " + clubAdminRequest.firstName + "'s Request Page</h1>");
+        writer.println("<p>First Name: " + clubAdminRequest.firstName  + " </p>");
+        writer.println("<p>Last Name: " + clubAdminRequest.lastName  + " </p>");
+        writer.println("<p>Email: " + clubAdminRequest.email  + " </p>");
+		writer.println("<p>Username: " + clubAdminRequest.username  + " </p>");
 		writer.println("<form action=ProcessClubAdminRequestServlet method=post>");
 		HttpSession session = request.getSession();
-		session.setAttribute("ClubAdminRequest",request);
+		session.setAttribute("ClubAdminRequestID",requestID);
 		writer.println("<button name='status' type='submit' value='" + true +"'>Approve</button><br>");
+		writer.println("<br>");
+		writer.println("<br>");
 		writer.println("<button name='status' type='submit' value='" + false +"'>Delete</button><br>");
 		writer.println("</form>");
-		writer.println("<p><a href=ManageClubAdminAccessServlet.java> Manage Club Admin Requests </a> </p>");
+		writer.println("<p><a href=ManageClubAdminAccessServlet> Manage Club Admin Requests </a> </p>");
 		writer.println("<p><a href=index.html> Home </a> </p>");
+		writer.println("</body></html>");
 	}
 
 }

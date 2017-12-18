@@ -55,7 +55,8 @@ public class ChangedClubServlet extends HttpServlet {
         	clubAdmin = (ClubAdminAccountObject) session.getAttribute("User");
         }catch(Exception e){
         	clubAdmin = null;
-        }
+        } 
+        writer.println("<!DOCTYPE html><html><body>");
         if (clubAdmin == null) {
 			 writer.println("You are not logged into a club admin account.<br>");
 			 writer.println("<p><a href=index.html> Home </a> </p>");
@@ -65,6 +66,7 @@ public class ChangedClubServlet extends HttpServlet {
 			 writer.println("Edit Club Succesful <br>");
              writer.println("<p><a href=index.html> Home </a> </p>");
 		}
+        writer.println("</body></html>");
 	}
 
 }

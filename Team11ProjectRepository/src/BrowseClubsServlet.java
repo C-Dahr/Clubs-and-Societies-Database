@@ -1,4 +1,4 @@
-import 
+
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
@@ -47,9 +47,13 @@ public class BrowseClubsServlet extends HttpServlet {
          ArrayList<ClubObject > clubs = control.processBrowseClubs();
         
          //Generate response HTML file
-         if (clubs.size() == 0)
+         if (clubs.size() == 0) {
+        	 		 writer.println("<!DOCTYPE html><html><body>");
                      writer.println("No clubs were found. <br>");
-         else {
+                     writer.println("<p><a href=index.html> Home </a> </p>");
+                     writer.println("</body></html>");
+         } else {
+        	 		 writer.println("<!DOCTYPE html><html><body>");
         	 		 writer.println("<form action=ViewClubInfoServlet method=post>");
                      writer.println("<p> Browse Clubs: </p>");
         	 		 writer.println("<p>");
@@ -59,6 +63,7 @@ public class BrowseClubsServlet extends HttpServlet {
                      writer.println("</p>");
                      writer.println("</form>");
                      writer.println("<p><a href=index.html> Home </a> </p>");
+                     writer.println("</body></html>");
          }
 	}
 

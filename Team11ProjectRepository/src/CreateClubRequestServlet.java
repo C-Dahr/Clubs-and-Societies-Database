@@ -49,11 +49,24 @@ public class CreateClubRequestServlet extends HttpServlet {
         clubName = clubNameList[0];
         description = descriptionList[0];
         location = locationList[0];
-
-        ClubRequestObject request = new ClubRequestObject(clubName,description,location);
-        boolean result = control.processCreateClubRequest();
+        ClubAdminAccountObject clubAdmin;
+        try {
+    		HttpSession session=request.getSession(false); 
+            clubAdmin =(ClubAdminAccountObject) session.getAttribute("User");
+            }catch(Exception e){
+            	clubAdmin = null;
+            }
+        boolean result;
+        try {
+        ClubRequestObject clubRequest = new ClubRequestObject("id", clubAdmin.id,description,location,clubName);
+        clubRequest.account = clubAdmin;
+        result = control.processCreateClubRequest(clubRequest);
+        }catch(Exception e) {
+        	result = false;
+        }
        
         //Generate response HTML file
+        writer.println("<!DOCTYPE html><html><body>");
         if (result == false) {
                     writer.println("Club Request Submission Failed <br>");
                     writer.println("<p>Form may not have been filled out properly or name is already taken</p>");
@@ -65,6 +78,7 @@ public class CreateClubRequestServlet extends HttpServlet {
                     writer.println("<p> Please wait for an admin to approve your request. An email will be sent when it has either be approved or denied.</p>");
                     writer.println("<p><a href=index.html> Home </a> </p>");
         }
+        writer.println("</body></html>");
 	}
 
 }

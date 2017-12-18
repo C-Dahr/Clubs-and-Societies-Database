@@ -48,19 +48,22 @@ public class CreateClubServlet extends HttpServlet {
          ArrayList<ClubRequestObject> requests = control.processDisplayClubRequests();
         
          //Generate response HTML file
-         if (requests.size() == 0)
-                     writer.println("No club requests were found. <br>");
-         else {
+         writer.println("<!DOCTYPE html><html><body>");
+         if (requests.size() == 0) {
+                    writer.println("No club requests were found. <br>");
+         			writer.println("<p><a href=index.html> Home </a> </p>");
+         }else {
         	 		 writer.println("<form action=ViewClubRequestServlet method=post>");
                      writer.println("<p> Club Requests: </p>");
         	 		 writer.println("<p>");
                      for(int i = 0; i < requests.size(); i++) {
-                                 writer.println(requests[i].clubName + "<button name='request' type='submit' value='" + requests[i].requestID +"'>View Info</button><br>");
+                                 writer.println(requests.get(i).clubName + "<button name='request' type='submit' value='" + requests.get(i).requestID +"'>View Info</button><br>");
                      }
                      writer.println("</p>");
                      writer.println("</form>");
                      writer.println("<p><a href=index.html> Home </a> </p>");
          }
+         writer.println("</body></html>");
 	}
 
 }
